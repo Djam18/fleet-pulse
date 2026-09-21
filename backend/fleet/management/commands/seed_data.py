@@ -1,0 +1,23 @@
+# Commercial Fleet Vehicle Pool (20 units)
+VEHICLES_DATA = [
+    {'vin': '1FTFW1ED4KFC12345', 'license_plate': 'VAN-101', 'make': 'Ford', 'model': 'Transit 250', 'year': 2023, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 12000},
+    {'vin': 'WD3PF4CD8KP987654', 'license_plate': 'VAN-102', 'make': 'Mercedes-Benz', 'model': 'Sprinter High Roof', 'year': 2022, 'status': 'MAINTENANCE', 'fuel_type': 'DIESEL', 'current_odometer': 38000},
+    {'vin': '4UZAA2AK3MC456789', 'license_plate': 'TRK-201', 'make': 'Freightliner', 'model': 'M2 106 Box Truck', 'year': 2021, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 85000},
+    {'vin': '5YJSA1E21HF334455', 'license_plate': 'EV-301', 'make': 'Rivian', 'model': 'Commercial EDV-700', 'year': 2023, 'status': 'ACTIVE', 'fuel_type': 'ELECTRIC', 'current_odometer': 9400},
+    {'vin': '1FDXE4FN8KDA11223', 'license_plate': 'OLD-901', 'make': 'Ford', 'model': 'E-350 Super Duty', 'year': 2018, 'status': 'RETIRED', 'fuel_type': 'PETROL', 'current_odometer': 245000},
+    {'vin': '2C4RDGBG5KR556677', 'license_plate': 'VAN-103', 'make': 'Ram', 'model': 'ProMaster 2500', 'year': 2023, 'status': 'ACTIVE', 'fuel_type': 'PETROL', 'current_odometer': 18500},
+    {'vin': 'JALC4B160E7112233', 'license_plate': 'TRK-202', 'make': 'Isuzu', 'model': 'NPR-HD Box Truck', 'year': 2022, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 52000},
+    {'vin': '4V4NC9EH1HN223344', 'license_plate': 'TRK-203', 'make': 'Volvo', 'model': 'VNL 860 Sleeper', 'year': 2022, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 142000},
+    {'vin': '1M2K187C5GM334455', 'license_plate': 'TRK-204', 'make': 'Mack', 'model': 'Anthem 64T', 'year': 2021, 'status': 'MAINTENANCE', 'fuel_type': 'DIESEL', 'current_odometer': 168000},
+    {'vin': '5YJSA1E22HF445566', 'license_plate': 'EV-302', 'make': 'Rivian', 'model': 'Commercial EDV-500', 'year': 2024, 'status': 'ACTIVE', 'fuel_type': 'ELECTRIC', 'current_odometer': 4200},
+    {'vin': '1FTNR2Y85PKA12345', 'license_plate': 'VAN-104', 'make': 'Ford', 'model': 'E-Transit Cargo', 'year': 2023, 'status': 'ACTIVE', 'fuel_type': 'ELECTRIC', 'current_odometer': 11200},
+    {'vin': 'WD3PF4CD9KP887766', 'license_plate': 'VAN-105', 'make': 'Mercedes-Benz', 'model': 'Sprinter 3500XD', 'year': 2022, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 46000},
+    {'vin': 'YS2R4X20005566778', 'license_plate': 'TRK-205', 'make': 'Scania', 'model': 'R500 V8 Tractor', 'year': 2021, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 195000},
+    {'vin': '1XPWD40X1ED998877', 'license_plate': 'TRK-206', 'make': 'Peterbilt', 'model': '579 Ultraloft', 'year': 2020, 'status': 'RETIRED', 'fuel_type': 'DIESEL', 'current_odometer': 385000},
+    {'vin': '1FTFW1ED5LFC55667', 'license_plate': 'VAN-106', 'make': 'Ford', 'model': 'Transit Connect', 'year': 2023, 'status': 'ACTIVE', 'fuel_type': 'PETROL', 'current_odometer': 21400},
+    {'vin': '2C4RDGBG6LR778899', 'license_plate': 'VAN-107', 'make': 'Ram', 'model': 'ProMaster 3500', 'year': 2022, 'status': 'ACTIVE', 'fuel_type': 'PETROL', 'current_odometer': 49000},
+    {'vin': 'JALC4B161F7223344', 'license_plate': 'TRK-207', 'make': 'Isuzu', 'model': 'NRR Crew Cab', 'year': 2023, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 28000},
+    {'vin': '5YJSA1E23HF556677', 'license_plate': 'EV-303', 'make': 'Rivian', 'model': 'Commercial EDV-700', 'year': 2024, 'status': 'ACTIVE', 'fuel_type': 'ELECTRIC', 'current_odometer': 6100},
+    {'vin': '4UZAA2AK4NC667788', 'license_plate': 'TRK-208', 'make': 'Freightliner', 'model': 'Cascadia 126', 'year': 2022, 'status': 'ACTIVE', 'fuel_type': 'DIESEL', 'current_odometer': 178000},
+    {'vin': '1FDXE4FN9LDA22334', 'license_plate': 'OLD-902', 'make': 'Ford', 'model': 'E-450 Cutaway', 'year': 2017, 'status': 'RETIRED', 'fuel_type': 'PETROL', 'current_odometer': 312000},
+]
