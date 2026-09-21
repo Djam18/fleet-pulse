@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div id="content-main">
+    <!-- Executive Admin Banner -->
+    <div style="background: linear-gradient(135deg, #090e17 0%, #1e293b 100%); border-radius: 16px; padding: 24px 28px; margin-bottom: 24px; border: 1px solid #334155; color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+                <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 4px 10px; border-radius: 9999px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                    {% trans "Executive Operations" %}
+                </span>
+                <h1 style="font-size: 1.6rem; font-weight: 700; margin: 8px 0 4px 0; letter-spacing: -0.02em;">{% trans "FleetPulse Master Administration" %}</h1>
+                <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">{% trans "Commercial asset controls, telematics log verification, and preventative service work orders." %}</p>
+            </div>
+            <div>
+                <a href="{% url 'fleet:dashboard' %}" style="display: inline-flex; align-items: center; gap: 8px; background: #2563eb; color: white; padding: 10px 18px; border-radius: 9999px; font-weight: 600; text-decoration: none; font-size: 0.88rem; box-shadow: 0 4px 12px rgba(37,99,235,0.3);">
+                    🚚 {% trans "Open Operations Dashboard" %} &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% if app_list %}
+        {% for app in app_list %}
+            <div class="app-{{ app.app_label }} module" style="margin-bottom: 24px;">
+                <table>
+                    <caption>
+                        <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+                    </caption>
+                    {% for model in app.models %}
+                        <tr class="model-{{ model.object_name|lower }}">
+                            {% if model.admin_url %}
+                                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                            {% else %}
+                                <th scope="row">{{ model.name }}</th>
+                            {% endif %}
+
+                            {% if model.add_url %}
+                                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+
+                            {% if model.admin_url %}
+                                {% if model.view_only %}
+                                    <td><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></td>
+                                {% else %}
+                                    <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                                {% endif %}
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>{% trans 'You don’t have permission to view or edit anything.' %}</p>
+    {% endif %}
+</div>
+{% endblock %}
