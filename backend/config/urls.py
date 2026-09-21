@@ -30,5 +30,11 @@ urlpatterns = [
     path('', include('fleet.urls')),
 ]
 
+# Custom HTTP Error Handlers
+handler400 = 'fleet.views.errors.bad_request_view'
+handler403 = 'fleet.views.errors.permission_denied_view'
+handler404 = 'fleet.views.errors.page_not_found_view'
+handler500 = 'fleet.views.errors.server_error_view'
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

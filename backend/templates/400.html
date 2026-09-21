@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}400 — {% trans "Bad Request" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center py-5">
+    <div class="text-center" style="max-width: 500px;">
+        <div class="display-1 fw-bold text-secondary mb-3">400</div>
+        <div class="p-3 bg-white rounded-circle shadow-xs d-inline-flex mb-3">
+            <i class="bi bi-exclamation-triangle-fill text-warning fs-1"></i>
+        </div>
+        <h1 class="h4 fw-bold text-dark mb-2">{% trans "Requête non conforme" %}</h1>
+        <p class="text-muted small mb-4">
+            {% trans "La syntaxe de la requête transmise est invalide ou corrompue. Veuillez réessayer." %}
+        </p>
+        <a href="{% url 'fleet:dashboard' %}" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold">
+            <i class="bi bi-house-door me-1"></i>{% trans "Tableau de bord" %}
+        </a>
+    </div>
+</div>
+{% endblock %}
