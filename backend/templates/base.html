@@ -61,13 +61,34 @@
         .nav-pills .nav-link:hover:not(.active) {
             background-color: rgba(255, 255, 255, 0.08);
         }
+        .cell-truncate-sm { max-width: 120px; }
+        .cell-truncate-md { max-width: 180px; }
+        .cell-truncate-lg { max-width: 250px; }
+        .btn-fleet-primary {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            border: none;
+            box-shadow: 0 2px 4px rgba(37,99,235,0.2);
+            transition: all 0.2s ease;
+        }
+        .btn-fleet-primary:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37,99,235,0.3);
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <!-- Global Toast Messages Container -->
+    {% include "components/messages.html" %}
+
     <div class="d-flex" style="min-height: 100vh;">
-        <!-- Persistent Left Sidebar -->
-        {% include "components/sidebar.html" %}
+        <!-- Left Sidebar (Can be overridden or suppressed on auth pages) -->
+        {% block sidebar %}
+            {% include "components/sidebar.html" %}
+        {% endblock %}
 
         <!-- Right Main Viewport Shell -->
         <div class="d-flex flex-column flex-grow-1" style="min-width: 0; background-color: #f8fafc;">
@@ -82,6 +103,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+    {% if request.user.is_authenticated %}
+        {% include "components/status_request_modal.html" %}
+        {% include "components/log_trip_modal.html" %}
+        {% include "components/ai_copilot_drawer.html" %}
+    {% endif %}
     {% block extra_js %}{% endblock %}
 </body>
 </html>

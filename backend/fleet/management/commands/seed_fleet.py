@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.NOTICE('Starting large-scale FleetPulse database seeding (3,000+ rows)...'))
 
-        # 1. Staff Admin & Drivers
+        # 1. Staff Admin, Dispatcher & Drivers
         admin_user, _ = User.objects.get_or_create(
             username='admin',
             defaults={'email': 'admin@fleetpulse.local', 'is_staff': True, 'is_superuser': True}
@@ -25,11 +25,20 @@ class Command(BaseCommand):
         admin_user.set_password('admin123')
         admin_user.save()
 
+        dispatcher_user, _ = User.objects.get_or_create(
+            username='dispatcher',
+            defaults={'email': 'dispatcher@fleetpulse.local', 'first_name': 'David', 'last_name': 'Dispatch'}
+        )
+        dispatcher_user.set_password('dispatch123')
+        dispatcher_user.save()
+
         driver_names = [('sarah_c', 'Sarah Connor'), ('alex_m', 'Alex Murphy'), ('marcus_w', 'Marcus Wright'), ('elena_r', 'Elena Rostova')]
         drivers = []
         for username, full_name in driver_names:
             first, last = full_name.split()
-            d, _ = User.objects.get_or_create(username=username, defaults={'first_name': first, 'last_name': last})
+            d, _ = User.objects.get_or_create(username=username, defaults={'first_name': first, 'last_name': last, 'email': f'{username}@fleetpulse.local'})
+            d.set_password('driver123')
+            d.save()
             drivers.append(d)
 
         # 2. Vehicle Registry

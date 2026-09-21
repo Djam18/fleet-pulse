@@ -3,9 +3,11 @@
     <div class="d-flex align-items-center justify-content-between w-100">
         <!-- Left: Mobile Toggle & Telematics Indicator -->
         <div class="d-flex align-items-center">
+            {% if request.user.is_authenticated %}
             <button class="btn btn-sm btn-outline-secondary d-lg-none me-2 px-2 py-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#appSidebar" aria-controls="appSidebar">
                 <i class="bi bi-list fs-5"></i>
             </button>
+            {% endif %}
             <div class="d-flex align-items-center gap-2" id="telematics-status-bar"
                  x-data="{
                      connected: true,
@@ -48,8 +50,24 @@
                 </select>
             </form>
 
-            <!-- User Auth Controls -->
+            <!-- User Auth Controls & Operational Quick Actions -->
             {% if request.user.is_authenticated %}
+                <button type="button" class="btn btn-sm btn-outline-warning text-dark border-warning-subtle rounded-pill px-2 px-md-3 py-1 d-flex align-items-center gap-1"
+                        data-bs-toggle="modal" data-bs-target="#statusRequestModal" title="{% trans "Demande de Changement de Statut" %}">
+                    <i class="bi bi-shield-exclamation text-warning"></i>
+                    <span class="small fw-semibold d-none d-xl-inline">{% trans "Signalement" %}</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-primary border-primary-subtle rounded-pill px-2 px-md-3 py-1 d-flex align-items-center gap-1"
+                        data-bs-toggle="modal" data-bs-target="#quickTripModal" title="{% trans "Enregistrer Trajet Rapide" %}">
+                    <i class="bi bi-plus-circle text-primary"></i>
+                    <span class="small fw-semibold d-none d-xl-inline">{% trans "Trajet" %}</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary rounded-pill px-2 px-md-3 py-1 d-flex align-items-center gap-1"
+                        data-bs-toggle="offcanvas" data-bs-target="#aiCopilotOffcanvas">
+                    <i class="bi bi-robot"></i>
+                    <span class="small fw-semibold d-none d-md-inline">Copilot</span>
+                </button>
+
                 <div class="dropdown">
                     <button class="btn btn-sm btn-light border rounded-pill px-2 px-md-3 py-1 d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle text-primary"></i>
