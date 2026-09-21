@@ -1,0 +1,80 @@
+/* FleetPulse Custom Admin Styling */
+
+:root {
+    --fp-primary: #1e3a8a;
+    --fp-primary-hover: #1d4ed8;
+    --fp-success: #15803d;
+    --fp-warning: #b45309;
+    --fp-danger: #b91c1c;
+    --fp-info: #0369a1;
+}
+
+/* Custom Status Badges */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-active {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.badge-maintenance {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
+
+.badge-retired {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.badge-passed {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.badge-failed {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Admin Header Branding */
+#header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+    border-bottom: 3px solid #3b82f6 !important;
+    padding: 12px 20px !important;
+}
+
+#branding h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+}
+
+#branding h1 a {
+    color: #f8fafc !important;
+}
+
+/* Table Enhancements */
+#changelist table tbody tr:hover {
+    background-color: #f8fafc !important;
+}
+
+.inspection-thumb {
+    max-width: 60px;
+    max-height: 40px;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+    object-fit: cover;
+}

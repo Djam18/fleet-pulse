@@ -1,0 +1,10 @@
+# Core Django 4.2 LTS Baseline
+Django~=4.2.0
+pillow>=10.0.0
+python-dotenv>=1.0.0
+dj-database-url>=2.1.0
+
+# Development & Upgrade Tooling
+pytest-django>=4.8.0
+django-upgrade>=1.15.0
+ruff>=0.3.0
