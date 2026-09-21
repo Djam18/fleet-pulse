@@ -1,0 +1,86 @@
+{% load i18n %}
+<aside id="appSidebar" class="sidebar offcanvas-lg offcanvas-start text-white" tabindex="-1" style="width: 250px; background: #090e17; border-right: 1px solid #1e293b; z-index: 1045;">
+    <!-- Offcanvas Header on Mobile -->
+    <div class="offcanvas-header d-lg-none border-bottom border-secondary pb-3 mb-2">
+        <h5 class="offcanvas-title text-white fw-bold d-flex align-items-center gap-2">
+            <span>🚚</span> FleetPulse
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#appSidebar" aria-label="Close"></button>
+    </div>
+
+    <div class="d-flex flex-column h-100 p-3">
+        <!-- Desktop Brand Header -->
+        <a href="{% url 'fleet:dashboard' %}" class="d-none d-lg-flex align-items-center gap-2 mb-3 text-white text-decoration-none px-2">
+            <span class="fs-4">🚚</span>
+            <div>
+                <div class="fw-bold fs-5 tracking-tight">FleetPulse</div>
+                <div class="text-primary-subtle small text-uppercase" style="font-size: 0.62rem; letter-spacing: 0.08em;">{% trans "Commercial Suite" %} &bull; 4.2 LTS</div>
+            </div>
+        </a>
+
+        <!-- Navigation Menu -->
+        <div class="small text-uppercase text-muted fw-bold px-2 mb-2" style="font-size: 0.65rem; letter-spacing: 0.1em;">{% trans "Operations" %}</div>
+        <ul class="nav nav-pills flex-column gap-1 mb-auto" style="overflow-y: auto; max-height: calc(100vh - 220px);">
+            <li class="nav-item">
+                <a href="{% url 'fleet:dashboard' %}" class="nav-link text-white d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'dashboard' %}active bg-primary{% endif %}">
+                    <i class="bi bi-speedometer2"></i> {% trans "Dashboard" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'fleet:vehicle_list' %}" class="nav-link text-white d-flex align-items-center gap-2 {% if 'vehicle' in request.resolver_match.url_name %}active bg-primary{% endif %}">
+                    <i class="bi bi-truck"></i> {% trans "Fleet Vehicles" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'fleet:trip_list' %}" class="nav-link text-white d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'trip_list' %}active bg-primary{% endif %}">
+                    <i class="bi bi-signpost-split"></i> {% trans "Trip Logbook" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'fleet:maintenance_list' %}" class="nav-link text-white d-flex align-items-center justify-content-between {% if request.resolver_match.url_name == 'maintenance_list' %}active bg-primary{% endif %}">
+                    <span class="d-flex align-items-center gap-2"><i class="bi bi-wrench-adjustable"></i> {% trans "Maintenance" %}</span>
+                    <span class="badge bg-warning text-dark rounded-pill" style="font-size: 0.65rem;">Alerts</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'fleet:inspection_list' %}" class="nav-link text-white d-flex align-items-center gap-2 {% if request.resolver_match.url_name == 'inspection_list' %}active bg-primary{% endif %}">
+                    <i class="bi bi-shield-check"></i> {% trans "Inspections" %}
+                </a>
+            </li>
+            <li class="mt-2 pt-2 border-top border-secondary">
+                <a href="{% url 'admin:index' %}" class="nav-link text-white-50 d-flex align-items-center gap-2" target="_blank">
+                    <i class="bi bi-sliders"></i> {% trans "Staff Admin" %}
+                </a>
+            </li>
+        </ul>
+
+        <!-- Operator Info / Auth Card -->
+        <div class="p-2 rounded bg-white bg-opacity-10 mt-auto">
+            {% if request.user.is_authenticated %}
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2 text-truncate me-2">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold small" style="width: 32px; height: 32px;">
+                            {{ request.user.username|slice:":2"|upper }}
+                        </div>
+                        <div class="small text-truncate">
+                            <div class="fw-semibold text-white text-truncate">{{ request.user.get_full_name|default:request.user.username }}</div>
+                            <div class="text-white-50 text-truncate" style="font-size: 0.68rem;">{{ request.user.email|default:"Operator" }}</div>
+                        </div>
+                    </div>
+                    <form action="{% url 'fleet:logout' %}" method="post" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-link text-white-50 p-1" title="{% trans 'Sign Out' %}">
+                            <i class="bi bi-box-arrow-right fs-5"></i>
+                        </button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <a href="{% url 'fleet:login' %}" class="btn btn-sm btn-primary w-100 py-1">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> {% trans "Sign In" %}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</aside>
