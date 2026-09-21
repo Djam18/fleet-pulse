@@ -46,6 +46,7 @@ class VehicleAdmin(admin.ModelAdmin):
     list_filter = ('status', 'fuel_type', 'make', 'year')
     search_fields = ('license_plate', 'vin', 'make', 'model')
     ordering = ('license_plate',)
+    list_per_page = 10
     inlines = [TripLogInLine, MaintenanceScheduleInLine]
 
     fieldsets = (

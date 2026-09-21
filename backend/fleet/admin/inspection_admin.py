@@ -18,6 +18,7 @@ class InspectionReportAdmin(admin.ModelAdmin):
     list_filter = ('overall_passed', 'inspected_at', 'brakes_passed', 'tires_passed')
     search_fields = ('vehicle__license_plate', 'inspector__username', 'notes')
     date_hierarchy = 'inspected_at'
+    list_per_page = 10
     readonly_fields = ('document_preview',)
 
     def status_badge(self, obj):
@@ -41,3 +42,7 @@ class InspectionReportAdmin(admin.ModelAdmin):
             )
         return "No document uploaded."
     document_preview.short_description = "Document Preview"
+
+    def has_add_permission(self, request):
+        """Inspections are executed by field mechanics via mobile checklist."""
+        return False

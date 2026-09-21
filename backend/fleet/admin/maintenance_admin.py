@@ -15,6 +15,7 @@ class MaintenanceScheduleAdmin(admin.ModelAdmin):
     )
     list_filter = ('service_code', 'vehicle__status')
     search_fields = ('vehicle__license_plate', 'service_code', 'description')
+    list_per_page = 10
 
     def interval_display(self, obj):
         return f"Every {obj.interval_km:,} km"

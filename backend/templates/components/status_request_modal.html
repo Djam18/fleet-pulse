@@ -1,0 +1,71 @@
+{% load i18n %}
+<div class="modal fade" id="statusRequestModal" tabindex="-1" aria-labelledby="statusRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 pb-0">
+                <div>
+                    <h5 class="modal-title fw-bold text-dark" id="statusRequestModalLabel">
+                        <i class="bi bi-shield-exclamation text-warning me-2"></i>{% trans "Demande de Changement de Statut" %}
+                    </h5>
+                    <p class="text-muted small mb-0">{% trans "Soumettre un signalement technique ou une indisponibilité" %}</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'fleet:status_request_create' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <div class="modal-body py-3">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-slate-700">{% trans "Véhicule concerné" %}</label>
+                        {% if vehicle %}
+                            <input type="hidden" name="vehicle_id" value="{{ vehicle.id }}">
+                            <input type="text" class="form-control form-control-sm bg-light" value="{{ vehicle.license_plate }} ({{ vehicle.make }} {{ vehicle.model }})" readonly>
+                        {% elif vehicles %}
+                            <select name="vehicle_id" class="form-select form-select-sm" required>
+                                <option value="" disabled selected>{% trans "Sélectionner un véhicule..." %}</option>
+                                {% for v in vehicles %}
+                                    <option value="{{ v.id }}">{{ v.license_plate }} — {{ v.make }} {{ v.model }} ({{ v.get_status_display }})</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <input type="text" name="license_plate" class="form-control form-control-sm" placeholder="Ex: FL-100-AA" required>
+                        {% endif %}
+                    </div>
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label small fw-semibold text-slate-700">{% trans "Statut souhaité" %}</label>
+                            <select name="requested_status" class="form-select form-select-sm" required>
+                                <option value="MAINTENANCE" selected>{% trans "Maintenance" %}</option>
+                                <option value="OUT_OF_SERVICE">{% trans "Hors service" %}</option>
+                                <option value="ACTIVE">{% trans "Actif" %}</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-semibold text-slate-700">{% trans "Niveau d'urgence" %}</label>
+                            <select name="priority" class="form-select form-select-sm" required>
+                                <option value="LOW">{% trans "Basse (Faible)" %}</option>
+                                <option value="MEDIUM" selected>{% trans "Normale" %}</option>
+                                <option value="HIGH">{% trans "Haute" %}</option>
+                                <option value="CRITICAL">🚨 {% trans "Critique / Urgente" %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold text-slate-700">{% trans "Motif & constatations" %}</label>
+                        <textarea name="reason" rows="3" class="form-control form-control-sm" placeholder="{% trans 'Ex: anomalie freinage, voyant moteur allumé, bruit suspect...' %}" required></textarea>
+                    </div>
+                    <div class="alert alert-info py-2 px-3 small border-0 bg-info-subtle text-info-emphasis rounded-3 mb-0">
+                        <i class="bi bi-robot me-1"></i>
+                        {% trans "Si les administrateurs sont hors ligne, l'Agent IA FleetPulse évalue le motif de sécurité et valide immédiatement les pannes critiques !" %}
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-sm btn-light border px-3" data-bs-dismiss="modal">{% trans "Annuler" %}</button>
+                    <button type="submit" class="btn btn-sm btn-warning text-dark fw-bold px-3">
+                        <i class="bi bi-send-fill me-1"></i>{% trans "Transmettre la demande" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

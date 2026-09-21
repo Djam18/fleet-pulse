@@ -97,4 +97,9 @@
             </tbody>
         </table>
     </div>
+    {% if page_obj.has_other_pages %}
+    <div class="px-4 pb-3 border-top">
+        {% include "components/pagination.html" %}
+    </div>
+    {% endif %}
 </div>

@@ -22,7 +22,7 @@ from django.urls import include, path
 # Custom Admin Branding
 admin.site.site_header = "FleetPulse Operations Management"
 admin.site.site_title = "FleetPulse Admin"
-admin.site.index_title = "Fleet Fleet & Maintenance Dashboard"
+admin.site.index_title = "Fleet Operations & Maintenance Hub"
 
 urlpatterns = [
     path('admin/', admin.site.urls),

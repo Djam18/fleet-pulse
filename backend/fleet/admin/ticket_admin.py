@@ -10,6 +10,7 @@ class StatusChangeRequestAdmin(admin.ModelAdmin):
     list_display = ['id', 'vehicle', 'requested_by', 'requested_status', 'priority_badge', 'status_badge', 'created_at']
     list_filter = ['status', 'priority', 'requested_status']
     search_fields = ['vehicle__license_plate', 'vehicle__vin', 'requested_by__username', 'reason']
+    list_per_page = 10
     actions = ['approve_requests', 'reject_requests']
 
     def priority_badge(self, obj):
@@ -56,9 +57,22 @@ class StatusChangeRequestAdmin(admin.ModelAdmin):
                 message=f'Your request to set {req.vehicle.license_plate} to {req.get_requested_status_display()} was approved by {request.user.username}.'
             )
 
+    def has_add_permission(self, request):
+        """Requests are submitted by field drivers via web interface."""
+        return False
+
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ['id', 'recipient', 'title', 'is_read', 'created_at']
     list_filter = ['is_read']
     search_fields = ['recipient__username', 'title', 'message']
+    list_per_page = 10
+
+    def has_add_permission(self, request):
+        """Notifications are generated automatically by system alerts."""
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        """Notification content is immutable once dispatched."""
+        return False

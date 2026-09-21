@@ -40,3 +40,25 @@ class FleetAdminTests(TestCase):
         badge_html = vehicle_admin.status_badge(self.vehicle)
         self.assertIn('badge-active', badge_html)
         self.assertIn('Active &amp; Operational', badge_html)
+
+    def test_admin_button_permissions_restricted(self):
+        trip_admin = admin.site._registry[TripLog]
+        self.assertFalse(trip_admin.has_add_permission(None))
+        self.assertFalse(trip_admin.has_delete_permission(None))
+
+        from fleet.models import Notification, StatusChangeRequest
+        ticket_admin = admin.site._registry[StatusChangeRequest]
+        self.assertFalse(ticket_admin.has_add_permission(None))
+
+        notif_admin = admin.site._registry[Notification]
+        self.assertFalse(notif_admin.has_add_permission(None))
+        self.assertFalse(notif_admin.has_change_permission(None))
+
+        insp_admin = admin.site._registry[InspectionReport]
+        self.assertFalse(insp_admin.has_add_permission(None))
+
+    def test_admin_pagination_configured(self):
+        from fleet.models import Notification, StatusChangeRequest
+        for model in (Vehicle, TripLog, MaintenanceSchedule, InspectionReport, StatusChangeRequest, Notification):
+            model_admin = admin.site._registry[model]
+            self.assertEqual(model_admin.list_per_page, 10)

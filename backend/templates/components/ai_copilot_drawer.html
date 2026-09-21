@@ -1,0 +1,109 @@
+{% load i18n %}
+<!-- AI Copilot Floating Launcher Button -->
+<div class="position-fixed bottom-0 end-0 p-3 p-md-4" style="z-index: 1050;">
+    <button class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"
+            style="width: 56px; height: 56px; box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#aiCopilotOffcanvas" aria-controls="aiCopilotOffcanvas">
+        <i class="bi bi-robot fs-4"></i>
+    </button>
+</div>
+
+<!-- Offcanvas AI Fleet Copilot Drawer -->
+<div class="offcanvas offcanvas-end border-0 shadow-lg" tabindex="-1" id="aiCopilotOffcanvas"
+     style="width: 420px; max-width: 95vw;"
+     x-data="{
+         messages: [
+             { role: 'assistant', text: 'Bonjour ! Je suis l\'Agent IA FleetPulse. Je peux analyser la télématique, inspecter vos véhicules, ou auto-approuver vos demandes de maintenance. Comment puis-je vous aider ?' }
+         ],
+         promptInput: '',
+         isStreaming: false,
+         sendPrompt(text) {
+             const query = text || this.promptInput.trim();
+             if (!query || this.isStreaming) return;
+             this.messages.push({ role: 'user', text: query });
+             this.promptInput = '';
+             this.isStreaming = true;
+             const assistantIdx = this.messages.length;
+             this.messages.push({ role: 'assistant', text: '' });
+             this.$nextTick(() => { this.scrollToBottom(); });
+
+             const url = '{% url 'fleet:ai_chat' %}?prompt=' + encodeURIComponent(query);
+             const es = new EventSource(url);
+             es.onmessage = (e) => {
+                 this.messages[assistantIdx].text += e.data;
+                 this.scrollToBottom();
+             };
+             es.addEventListener('done', () => {
+                 es.close();
+                 this.isStreaming = false;
+                 this.scrollToBottom();
+             });
+             es.onerror = () => {
+                 es.close();
+                 this.isStreaming = false;
+             };
+         },
+         scrollToBottom() {
+             const c = document.getElementById('ai-chat-stream-body');
+             if (c) c.scrollTop = c.scrollHeight;
+         }
+     }">
+    <div class="offcanvas-header bg-slate-900 text-white border-bottom py-3" style="background-color: #0f172a;">
+        <div class="d-flex align-items-center gap-2">
+            <div class="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="bi bi-robot fs-5"></i>
+            </div>
+            <div>
+                <h6 class="offcanvas-title fw-bold mb-0 text-white">FleetPulse Copilot</h6>
+                <span class="badge bg-success-subtle text-success border border-success-subtle small" style="font-size: 0.65rem;">
+                    <span class="live-dot me-1" style="width: 6px; height: 6px;"></span>{% trans "Agent Autonome Actif" %}
+                </span>
+            </div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <!-- Chat Messages Scroll Container -->
+    <div class="offcanvas-body d-flex flex-column p-3 bg-light" id="ai-chat-stream-body" style="overflow-y: auto; flex: 1 1 auto;">
+        <!-- Quick Action Prompt Pills -->
+        <div class="mb-3 d-flex flex-wrap gap-1">
+            <button type="button" class="btn btn-sm btn-white border rounded-pill small py-1 px-2 text-slate-700"
+                    @click="sendPrompt('Quel est l\'état global de la flotte ?')">
+                📊 {% trans "État flotte" %}
+            </button>
+            <button type="button" class="btn btn-sm btn-white border rounded-pill small py-1 px-2 text-slate-700"
+                    @click="sendPrompt('Y a-t-il des véhicules nécessitant une maintenance urgente ?')">
+                🚨 {% trans "Alertes urgentes" %}
+            </button>
+            <button type="button" class="btn btn-sm btn-white border rounded-pill small py-1 px-2 text-slate-700"
+                    @click="sendPrompt('Vérifie si les demandes de panne critique ont été approuvées')">
+                🤖 {% trans "Auto-approvals" %}
+            </button>
+        </div>
+
+        <!-- Chat Bubble List -->
+        <div class="d-flex flex-column gap-3">
+            <template x-for="(msg, idx) in messages" :key="idx">
+                <div :class="msg.role === 'user' ? 'd-flex justify-content-end' : 'd-flex justify-content-start'">
+                    <div class="p-3 rounded-4 shadow-xs small"
+                         :style="msg.role === 'user' ? 'max-width: 85%; background: #2563eb; color: #fff;' : 'max-width: 90%; background: #fff; border: 1px solid #e2e8f0; color: #1e293b; white-space: pre-wrap;'">
+                        <span x-text="msg.text"></span>
+                        <span x-show="isStreaming && idx === messages.length - 1" class="spinner-grow spinner-grow-sm text-primary ms-1" role="status"></span>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- Input Footer -->
+    <div class="p-3 bg-white border-top">
+        <form @submit.prevent="sendPrompt()" class="d-flex gap-2">
+            <input type="text" x-model="promptInput" class="form-control form-control-sm rounded-pill px-3"
+                   placeholder="{% trans 'Posez une question ou donnez un ordre...' %}" :disabled="isStreaming">
+            <button type="submit" class="btn btn-sm btn-primary rounded-circle d-flex align-items-center justify-content-center p-0"
+                    style="width: 36px; height: 36px;" :disabled="isStreaming">
+                <i class="bi bi-send-fill small"></i>
+            </button>
+        </form>
+    </div>
+</div>
