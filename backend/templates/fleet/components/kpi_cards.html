@@ -1,0 +1,67 @@
+{% load i18n %}
+<div class="row g-3 mb-4">
+    <!-- Total Fleet -->
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-neo p-3 h-100 position-relative overflow-hidden">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted small fw-semibold text-uppercase" style="letter-spacing: 0.05em;">{% trans "Fleet Size" %}</span>
+                <span class="badge bg-primary-subtle text-primary rounded-pill px-2 py-1 small">{% trans "Total" %}</span>
+            </div>
+            <div class="d-flex align-items-baseline gap-2">
+                <h2 class="fw-bold fs-1 mb-0">{{ total_vehicles }}</h2>
+                <span class="text-muted small">{% trans "units" %}</span>
+            </div>
+            <div class="text-muted small mt-2 d-flex align-items-center gap-1">
+                <i class="bi bi-shield-check text-success"></i> {% trans "100% VIN registered" %}
+            </div>
+        </div>
+    </div>
+    <!-- Active on Road -->
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-neo p-3 h-100 position-relative overflow-hidden" style="border-left: 4px solid #10b981;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted small fw-semibold text-uppercase" style="letter-spacing: 0.05em;">{% trans "Active Units" %}</span>
+                <span class="badge bg-success-subtle text-success rounded-pill px-2 py-1 small">{% trans "Operational" %}</span>
+            </div>
+            <div class="d-flex align-items-baseline gap-2">
+                <h2 class="fw-bold fs-1 text-success mb-0">{{ active_vehicles }}</h2>
+                <span class="text-muted small">{% trans "on duty" %}</span>
+            </div>
+            <div class="text-success small mt-2 d-flex align-items-center gap-1">
+                <i class="bi bi-broadcast"></i> {% trans "Ready for dispatch" %}
+            </div>
+        </div>
+    </div>
+    <!-- Maintenance Alerts -->
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-neo p-3 h-100 position-relative overflow-hidden" style="border-left: 4px solid #f59e0b;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted small fw-semibold text-uppercase" style="letter-spacing: 0.05em;">{% trans "In Service" %}</span>
+                <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-2 py-1 small">{% trans "Workshop" %}</span>
+            </div>
+            <div class="d-flex align-items-baseline gap-2">
+                <h2 class="fw-bold fs-1 text-warning mb-0">{{ maintenance_vehicles }}</h2>
+                <span class="text-muted small">{% trans "under repair" %}</span>
+            </div>
+            <div class="text-warning-emphasis small mt-2 d-flex align-items-center gap-1">
+                <i class="bi bi-wrench"></i> {% trans "Active work orders" %}
+            </div>
+        </div>
+    </div>
+    <!-- Logged Mileage -->
+    <div class="col-sm-6 col-xl-3">
+        <div class="card card-neo p-3 h-100 position-relative overflow-hidden" style="border-left: 4px solid #3b82f6;">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="text-muted small fw-semibold text-uppercase" style="letter-spacing: 0.05em;">{% trans "Total Distance" %}</span>
+                <span class="badge bg-info-subtle text-info-emphasis rounded-pill px-2 py-1 small">{% trans "Telematics" %}</span>
+            </div>
+            <div class="d-flex align-items-baseline gap-2">
+                <h2 class="fw-bold fs-1 text-primary mb-0">{{ total_distance_km|default:0 }}</h2>
+                <span class="text-muted small">km</span>
+            </div>
+            <div class="text-muted small mt-2 d-flex align-items-center gap-1">
+                <i class="bi bi-graph-up-arrow text-primary"></i> {% blocktrans with count=total_trips %}Across {{ count }} trips{% endblocktrans %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+{% load i18n %}
+{{ chart_payload|json_script:"apex-chart-data" }}
+
+<div class="row g-4 mb-4">
+    <!-- Mileage Distribution (ApexCharts Column Chart) -->
+    <div class="col-lg-8">
+        <div class="card card-neo p-4 h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                    <h3 class="h6 fw-bold mb-0">{% trans "Vehicle Mileage Telematics" %}</h3>
+                    <p class="text-muted small mb-0">{% trans "Recorded odometer per operational unit (km)" %}</p>
+                </div>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">{% trans "Telematics" %}</span>
+            </div>
+            <div id="apex-mileage-chart" style="min-height: 250px;"></div>
+        </div>
+    </div>
+
+    <!-- Fleet Status (ApexCharts Donut Chart) -->
+    <div class="col-lg-4">
+        <div class="card card-neo p-4 h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                    <h3 class="h6 fw-bold mb-0">{% trans "Fleet Readiness" %}</h3>
+                    <p class="text-muted small mb-0">{% trans "Operational availability ratio" %}</p>
+                </div>
+                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">{% trans "Availability" %}</span>
+            </div>
+            <div id="apex-status-chart" class="d-flex align-items-center justify-content-center" style="min-height: 250px;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const rawData = document.getElementById('apex-chart-data');
+    if (!rawData) return;
+    const data = JSON.parse(rawData.textContent);
+
+    const mileageEl = document.getElementById('apex-mileage-chart');
+    if (mileageEl) {
+        new ApexCharts(mileageEl, {
+            chart: { type: 'bar', height: 260, toolbar: { show: false }, fontFamily: 'inherit' },
+            colors: ['#2563eb'],
+            plotOptions: { bar: { borderRadius: 6, columnWidth: '45%' } },
+            dataLabels: { enabled: false },
+            series: [{ name: 'Odometer (km)', data: data.mileage_series }],
+            xaxis: { categories: data.mileage_labels, labels: { style: { fontSize: '11px', fontWeight: 600 } } },
+            yaxis: { labels: { formatter: (val) => val >= 1000 ? `${(val / 1000).toFixed(0)}k km` : `${val} km` } },
+            grid: { borderColor: '#f1f5f9', strokeDashArray: 4 },
+            tooltip: { y: { formatter: (val) => `${val.toLocaleString()} km` } }
+        }).render();
+    }
+
+    const statusEl = document.getElementById('apex-status-chart');
+    if (statusEl) {
+        new ApexCharts(statusEl, {
+            chart: { type: 'donut', height: 260, fontFamily: 'inherit' },
+            colors: ['#10b981', '#f59e0b', '#ef4444'],
+            labels: data.status_labels,
+            series: data.status_series,
+            plotOptions: {
+                pie: { donut: { size: '65%', labels: { show: true, total: { show: true, label: 'Units', fontSize: '14px' } } } }
+            },
+            legend: { position: 'bottom', fontSize: '12px' },
+            dataLabels: { enabled: false }
+        }).render();
+    }
+});
+</script>

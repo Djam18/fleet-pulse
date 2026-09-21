@@ -1,0 +1,80 @@
+{% load i18n %}
+<div class="row g-4 mb-4">
+    <!-- Recent Trips -->
+    <div class="col-lg-6">
+        <div class="card card-neo p-4 h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h3 class="h6 fw-bold mb-0"><i class="bi bi-clock-history me-1 text-primary"></i> {% trans "Recent Completed Trips" %}</h3>
+                <a href="{% url 'admin:fleet_triplog_changelist' %}" class="small text-decoration-none fw-semibold" target="_blank">{% trans "Admin logs" %} &rarr;</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                    <thead class="table-light">
+                        <tr>
+                            <th>{% trans "Vehicle" %}</th>
+                            <th>{% trans "Driver" %}</th>
+                            <th>{% trans "Distance" %}</th>
+                            <th>{% trans "Fuel Cost" %}</th>
+                            <th class="text-end">{% trans "Date" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in recent_trips %}
+                        <tr>
+                            <td><strong>{{ t.vehicle.license_plate }}</strong></td>
+                            <td>{{ t.driver.get_full_name|default:t.driver.username|default:"Unassigned" }}</td>
+                            <td><span class="badge bg-primary-subtle text-primary rounded-pill">{{ t.distance_km }} km</span></td>
+                            <td>${{ t.fuel_cost }}</td>
+                            <td class="text-end text-muted">{{ t.start_time|date:"M d, H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="5" class="text-center py-3 text-muted">{% trans "No trip records available." %}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Inspections -->
+    <div class="col-lg-6">
+        <div class="card card-neo p-4 h-100">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h3 class="h6 fw-bold mb-0"><i class="bi bi-shield-check me-1 text-success"></i> {% trans "Safety Inspection Checklists" %}</h3>
+                <a href="{% url 'admin:fleet_inspectionreport_changelist' %}" class="small text-decoration-none fw-semibold" target="_blank">{% trans "Admin reports" %} &rarr;</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                    <thead class="table-light">
+                        <tr>
+                            <th>{% trans "Vehicle" %}</th>
+                            <th>{% trans "Inspector" %}</th>
+                            <th>{% trans "Result" %}</th>
+                            <th>{% trans "Notes" %}</th>
+                            <th class="text-end">{% trans "Date" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in recent_inspections %}
+                        <tr>
+                            <td><strong>{{ i.vehicle.license_plate }}</strong></td>
+                            <td>{{ i.inspector.username }}</td>
+                            <td>
+                                {% if i.overall_passed %}
+                                    <span class="badge bg-success-subtle text-success rounded-pill">{% trans "PASSED" %}</span>
+                                {% else %}
+                                    <span class="badge bg-danger-subtle text-danger rounded-pill">{% trans "DEFECTS" %}</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-truncate" style="max-width: 140px;">{{ i.notes|default:"-" }}</td>
+                            <td class="text-end text-muted">{{ i.inspected_at|date:"M d" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="5" class="text-center py-3 text-muted">{% trans "No inspection records." %}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

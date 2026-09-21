@@ -1,80 +1,119 @@
-/* FleetPulse Custom Admin Styling */
+/* FleetPulse Premium Admin Skin */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-:root {
-    --fp-primary: #1e3a8a;
-    --fp-primary-hover: #1d4ed8;
-    --fp-success: #15803d;
-    --fp-warning: #b45309;
-    --fp-danger: #b91c1c;
-    --fp-info: #0369a1;
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
 }
 
-/* Custom Status Badges */
-.badge {
-    display: inline-block;
-    padding: 0.25rem 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1;
-    border-radius: 9999px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.badge-active {
-    background-color: #dcfce7;
-    color: #166534;
-    border: 1px solid #86efac;
-}
-
-.badge-maintenance {
-    background-color: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fcd34d;
-}
-
-.badge-retired {
-    background-color: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fca5a5;
-}
-
-.badge-passed {
-    background-color: #dcfce7;
-    color: #15803d;
-}
-
-.badge-failed {
-    background-color: #fee2e2;
-    color: #b91c1c;
-}
-
-/* Admin Header Branding */
 #header {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
-    border-bottom: 3px solid #3b82f6 !important;
-    padding: 12px 20px !important;
+    background: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e293b 100%) !important;
+    border-bottom: 2px solid #38bdf8 !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.25) !important;
+    padding: 14px 24px !important;
 }
 
-#branding h1 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+#branding h1 a {
+    color: #ffffff !important;
     font-weight: 700 !important;
     letter-spacing: -0.02em !important;
 }
 
-#branding h1 a {
-    color: #f8fafc !important;
+#user-tools a {
+    color: #94a3b8 !important;
+    transition: color 0.15s ease;
+}
+#user-tools a:hover {
+    color: #38bdf8 !important;
 }
 
-/* Table Enhancements */
+.module {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+    margin-bottom: 20px !important;
+    overflow: hidden !important;
+}
+
+.module h2, .module caption {
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 12px 16px !important;
+}
+
+/* Custom Status Badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.badge-active {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+.badge-maintenance {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+.badge-retired {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+.badge-passed {
+    background: #ecfdf5;
+    color: #047857;
+}
+.badge-failed {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+/* Tables & Inputs */
+#changelist table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+}
+
+#changelist table tbody tr {
+    transition: background-color 0.15s ease !important;
+}
+
 #changelist table tbody tr:hover {
     background-color: #f8fafc !important;
 }
 
-.inspection-thumb {
-    max-width: 60px;
-    max-height: 40px;
-    border-radius: 4px;
-    border: 1px solid #cbd5e1;
-    object-fit: cover;
+#changelist-search input[type="text"] {
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 7px 12px !important;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input {
+    background: #2563eb !important;
+    border-radius: 8px !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2) !important;
+    transition: background 0.15s ease !important;
+}
+
+.button:hover, input[type=submit]:hover {
+    background: #1d4ed8 !important;
 }
