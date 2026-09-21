@@ -1,0 +1,908 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-21 16:36+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: backend/config/settings.py:108
+msgid "English"
+msgstr "Inglés"
+
+#: backend/config/settings.py:109
+msgid "French"
+msgstr "Francés"
+
+#: backend/config/settings.py:110
+msgid "Spanish"
+msgstr "Español"
+
+#: backend/fleet/models/vehicle.py:23
+msgid "Active & Operational"
+msgstr "Activo y operativo"
+
+#: backend/fleet/models/vehicle.py:24
+msgid "In Maintenance"
+msgstr "En mantenimiento"
+
+#: backend/fleet/models/vehicle.py:25
+msgid "Retired"
+msgstr "Retirado"
+
+#: backend/fleet/models/vehicle.py:28
+msgid "Diesel"
+msgstr "Diésel"
+
+#: backend/fleet/models/vehicle.py:29
+msgid "Petrol"
+msgstr "Gasolina"
+
+#: backend/fleet/models/vehicle.py:30
+msgid "Electric"
+msgstr "Eléctrico"
+
+#: backend/fleet/models/vehicle.py:31
+msgid "Hybrid"
+msgstr "Híbrido"
+
+#: backend/templates/admin/base_site.html:4
+msgid "FleetPulse Operations Portal"
+msgstr "Portal de operaciones FleetPulse"
+
+#: backend/templates/admin/index.html:11
+msgid "Executive Operations"
+msgstr "Operaciones ejecutivas"
+
+#: backend/templates/admin/index.html:13
+msgid "FleetPulse Master Administration"
+msgstr "FleetPulse Administración Maestra"
+
+#: backend/templates/admin/index.html:14
+msgid ""
+"Commercial asset controls, telematics log verification, and preventative "
+"service work orders."
+msgstr "Control de activos comerciales, verificación telemática y órdenes de servicio preventivo."
+
+#: backend/templates/admin/index.html:18
+msgid "Open Operations Dashboard"
+msgstr "Abrir panel de operaciones"
+
+#: backend/templates/admin/index.html:29
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr "Modelos en la aplicación %(name)s"
+
+#: backend/templates/admin/index.html:40
+msgid "Add"
+msgstr "Añadir"
+
+#: backend/templates/admin/index.html:47
+msgid "View"
+msgstr "Ver"
+
+#: backend/templates/admin/index.html:49
+msgid "Change"
+msgstr "Modificar"
+
+#: backend/templates/admin/index.html:60
+msgid "You don’t have permission to view or edit anything."
+msgstr "No tienes permiso para ver o editar nada."
+
+#: backend/templates/admin/login.html:52
+msgid "Commercial Fleet Administration Console"
+msgstr "Consola de administración de flota comercial"
+
+#: backend/templates/admin/login.html:53
+msgid "Login with Username or Email"
+msgstr "Iniciar sesión con usuario o correo"
+
+#: backend/templates/admin/login.html:57
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: backend/templates/admin/login.html:69
+msgid "Staff Username or Email"
+msgstr "Usuario o correo del personal"
+
+#: backend/templates/admin/login.html:79
+msgid "Sign in to Staff Console"
+msgstr "Iniciar sesión en la consola del personal"
+
+#: backend/templates/admin/login.html:83
+msgid "Return to Fleet Operations Portal"
+msgstr "Volver al portal de operaciones"
+
+#: backend/templates/base.html:7
+msgid "Operations Platform"
+msgstr "Plataforma de operaciones"
+
+#: backend/templates/components/pagination.html:6
+msgid "Showing"
+msgstr "Mostrando"
+
+#: backend/templates/components/pagination.html:8
+msgid "to"
+msgstr "a"
+
+#: backend/templates/components/pagination.html:10
+msgid "of"
+msgstr "de"
+
+#: backend/templates/components/pagination.html:12
+#: backend/templates/fleet/vehicle_detail.html:42
+msgid "records"
+msgstr "registros"
+
+#: backend/templates/components/pagination.html:14
+msgid "per page"
+msgstr "por página"
+
+#: backend/templates/components/pagination.html:18
+msgid "Page navigation"
+msgstr "Navegación de página"
+
+#: backend/templates/components/pagination.html:23
+msgid "First Page"
+msgstr "Primera página"
+
+#: backend/templates/components/pagination.html:28
+msgid "Previous"
+msgstr "Anterior"
+
+#: backend/templates/components/pagination.html:54
+msgid "Next"
+msgstr "Siguiente"
+
+#: backend/templates/components/pagination.html:59
+msgid "Last Page"
+msgstr "Última página"
+
+#: backend/templates/components/sidebar.html:17
+msgid "Commercial Suite"
+msgstr "Suite comercial"
+
+#: backend/templates/components/sidebar.html:22
+msgid "Operations"
+msgstr "Operaciones"
+
+#: backend/templates/components/sidebar.html:26
+msgid "Dashboard"
+msgstr "Panel de control"
+
+#: backend/templates/components/sidebar.html:31
+msgid "Fleet Vehicles"
+msgstr "Vehículos de la flota"
+
+#: backend/templates/components/sidebar.html:36
+#: backend/templates/fleet/trip_list.html:4
+msgid "Trip Logbook"
+msgstr "Registro de viajes"
+
+#: backend/templates/components/sidebar.html:41
+#: backend/templates/fleet/components/vehicle_table.html:36
+msgid "Maintenance"
+msgstr "Mantenimiento"
+
+#: backend/templates/components/sidebar.html:47
+msgid "Inspections"
+msgstr "Inspecciones"
+
+#: backend/templates/components/sidebar.html:52
+msgid "Staff Admin"
+msgstr "Admin del personal"
+
+#: backend/templates/components/sidebar.html:72
+#: backend/templates/components/top_header.html:67
+msgid "Sign Out"
+msgstr "Cerrar sesión"
+
+#: backend/templates/components/sidebar.html:80
+#: backend/templates/components/top_header.html:74
+#: backend/templates/registration/login.html:4
+#: backend/templates/registration/register.html:50
+msgid "Sign In"
+msgstr "Iniciar sesión"
+
+#: backend/templates/components/top_header.html:29
+msgid "Fleet Telematics"
+msgstr "Telemetría de flota"
+
+#: backend/templates/components/top_header.html:61
+msgid "Admin Console"
+msgstr "Consola de administración"
+
+#: backend/templates/fleet/components/charts.html:10
+msgid "Vehicle Mileage Telematics"
+msgstr "Telemetría de kilometraje de vehículos"
+
+#: backend/templates/fleet/components/charts.html:11
+msgid "Recorded odometer per operational unit (km)"
+msgstr "Odómetro registrado por unidad operativa (km)"
+
+#: backend/templates/fleet/components/charts.html:13
+#: backend/templates/fleet/components/kpi_cards.html:56
+msgid "Telematics"
+msgstr "Telemetría"
+
+#: backend/templates/fleet/components/charts.html:24
+msgid "Fleet Readiness"
+msgstr "Preparación de flota"
+
+#: backend/templates/fleet/components/charts.html:25
+msgid "Operational availability ratio"
+msgstr "Ratio de disponibilidad operativa"
+
+#: backend/templates/fleet/components/charts.html:27
+msgid "Availability"
+msgstr "Disponibilidad"
+
+#: backend/templates/fleet/components/hero_header.html:5
+msgid "Operations Hub"
+msgstr "Centro de operaciones"
+
+#: backend/templates/fleet/components/hero_header.html:6
+msgid "Real-time Vehicle Dispatch"
+msgstr "Despacho de vehículos en tiempo real"
+
+#: backend/templates/fleet/components/hero_header.html:8
+msgid "Fleet Command Center"
+msgstr "Centro de comando de flota"
+
+#: backend/templates/fleet/components/hero_header.html:9
+msgid ""
+"Commercial vehicle tracking, odometer telematics, and preventative "
+"maintenance."
+msgstr "Seguimiento de vehículos comerciales, telemetría de odómetro y mantenimiento preventivo."
+
+#: backend/templates/fleet/components/hero_header.html:21
+msgid "Log Trip"
+msgstr "Registrar viaje"
+
+#: backend/templates/fleet/components/hero_header.html:24
+msgid "Add Vehicle"
+msgstr "Añadir vehículo"
+
+#: backend/templates/fleet/components/kpi_cards.html:7
+msgid "Fleet Size"
+msgstr "Tamaño de flota"
+
+#: backend/templates/fleet/components/kpi_cards.html:8
+msgid "Total"
+msgstr "Total"
+
+#: backend/templates/fleet/components/kpi_cards.html:12
+msgid "units"
+msgstr "unidades"
+
+#: backend/templates/fleet/components/kpi_cards.html:15
+#, python-format
+msgid "100%% VIN registered"
+msgstr "100%% VIN registrados"
+
+#: backend/templates/fleet/components/kpi_cards.html:23
+msgid "Active Units"
+msgstr "Unidades activas"
+
+#: backend/templates/fleet/components/kpi_cards.html:24
+msgid "Operational"
+msgstr "Operativo"
+
+#: backend/templates/fleet/components/kpi_cards.html:28
+msgid "on duty"
+msgstr "en servicio"
+
+#: backend/templates/fleet/components/kpi_cards.html:31
+msgid "Ready for dispatch"
+msgstr "Listo para despacho"
+
+#: backend/templates/fleet/components/kpi_cards.html:39
+msgid "In Service"
+msgstr "En servicio"
+
+#: backend/templates/fleet/components/kpi_cards.html:40
+msgid "Workshop"
+msgstr "Taller"
+
+#: backend/templates/fleet/components/kpi_cards.html:44
+msgid "under repair"
+msgstr "en reparación"
+
+#: backend/templates/fleet/components/kpi_cards.html:47
+msgid "Active work orders"
+msgstr "Órdenes de trabajo activas"
+
+#: backend/templates/fleet/components/kpi_cards.html:55
+msgid "Total Distance"
+msgstr "Distancia total"
+
+#: backend/templates/fleet/components/kpi_cards.html:63
+#, python-format
+msgid "Across %(count)s trips"
+msgstr "En %(count)s viajes"
+
+#: backend/templates/fleet/components/recent_activity.html:7
+msgid "Recent Completed Trips"
+msgstr "Viajes completados recientes"
+
+#: backend/templates/fleet/components/recent_activity.html:8
+msgid "Admin logs"
+msgstr "Registros de administración"
+
+#: backend/templates/fleet/components/recent_activity.html:14
+#: backend/templates/fleet/components/recent_activity.html:50
+#: backend/templates/fleet/components/vehicle_table.html:32
+#: backend/templates/fleet/inspection_list.html:24
+#: backend/templates/fleet/maintenance_list.html:27
+#: backend/templates/fleet/trip_list.html:40
+#: backend/templates/fleet/vehicle_list.html:54
+msgid "Vehicle"
+msgstr "Vehículo"
+
+#: backend/templates/fleet/components/recent_activity.html:15
+#: backend/templates/fleet/trip_list.html:41
+#: backend/templates/fleet/vehicle_detail.html:80
+msgid "Driver"
+msgstr "Conductor"
+
+#: backend/templates/fleet/components/recent_activity.html:16
+#: backend/templates/fleet/trip_list.html:43
+#: backend/templates/fleet/vehicle_detail.html:82
+msgid "Distance"
+msgstr "Distancia"
+
+#: backend/templates/fleet/components/recent_activity.html:17
+#: backend/templates/fleet/trip_list.html:44
+msgid "Fuel Cost"
+msgstr "Costo de combustible"
+
+#: backend/templates/fleet/components/recent_activity.html:18
+#: backend/templates/fleet/components/recent_activity.html:54
+#: backend/templates/fleet/vehicle_detail.html:83
+msgid "Date"
+msgstr "Fecha"
+
+#: backend/templates/fleet/components/recent_activity.html:31
+msgid "No trip records available."
+msgstr "No hay registros de viajes disponibles."
+
+#: backend/templates/fleet/components/recent_activity.html:43
+msgid "Safety Inspection Checklists"
+msgstr "Listas de control de inspección de seguridad"
+
+#: backend/templates/fleet/components/recent_activity.html:44
+msgid "Admin reports"
+msgstr "Informes de administración"
+
+#: backend/templates/fleet/components/recent_activity.html:51
+#: backend/templates/fleet/inspection_list.html:25
+msgid "Inspector"
+msgstr "Inspector"
+
+#: backend/templates/fleet/components/recent_activity.html:52
+msgid "Result"
+msgstr "Resultado"
+
+#: backend/templates/fleet/components/recent_activity.html:53
+msgid "Notes"
+msgstr "Notas"
+
+#: backend/templates/fleet/components/recent_activity.html:64
+#: backend/templates/fleet/inspection_list.html:43
+msgid "PASSED"
+msgstr "APROBADO"
+
+#: backend/templates/fleet/components/recent_activity.html:66
+msgid "DEFECTS"
+msgstr "DEFECTOS"
+
+#: backend/templates/fleet/components/recent_activity.html:73
+msgid "No inspection records."
+msgstr "No hay registros de inspección."
+
+#: backend/templates/fleet/components/vehicle_table.html:6
+msgid "Vehicle Registry"
+msgstr "Registro de vehículos"
+
+#: backend/templates/fleet/components/vehicle_table.html:7
+msgid "Live status and telematics overview"
+msgstr "Resumen de telemetría y estado en tiempo real"
+
+#: backend/templates/fleet/components/vehicle_table.html:13
+msgid "All"
+msgstr "Todos"
+
+#: backend/templates/fleet/components/vehicle_table.html:24
+msgid "Search vehicles..."
+msgstr "Buscar vehículos..."
+
+#: backend/templates/fleet/components/vehicle_table.html:33
+#: backend/templates/fleet/vehicle_list.html:55
+msgid "Specifications"
+msgstr "Especificaciones"
+
+#: backend/templates/fleet/components/vehicle_table.html:34
+#: backend/templates/fleet/inspection_list.html:26
+#: backend/templates/fleet/vehicle_list.html:57
+msgid "Odometer"
+msgstr "Odómetro"
+
+#: backend/templates/fleet/components/vehicle_table.html:35
+#: backend/templates/fleet/vehicle_list.html:58
+msgid "Status"
+msgstr "Estado"
+
+#: backend/templates/fleet/components/vehicle_table.html:37
+#: backend/templates/fleet/maintenance_list.html:32
+#: backend/templates/fleet/vehicle_list.html:59
+msgid "Action"
+msgstr "Acción"
+
+#: backend/templates/fleet/components/vehicle_table.html:60
+msgid "Due"
+msgstr "Vence"
+
+#: backend/templates/fleet/components/vehicle_table.html:63
+msgid "All clear"
+msgstr "Todo despejado"
+
+#: backend/templates/fleet/components/vehicle_table.html:69
+msgid "Manage"
+msgstr "Gestionar"
+
+#: backend/templates/fleet/components/vehicle_table.html:74
+msgid "No vehicles found."
+msgstr "No se encontraron vehículos."
+
+#: backend/templates/fleet/inspection_list.html:4
+msgid "Safety Inspections"
+msgstr "Inspecciones de seguridad"
+
+#: backend/templates/fleet/inspection_list.html:9
+msgid "Driver Safety & Vehicle Inspection Reports (DVIR)"
+msgstr "Informes de inspección de seguridad del conductor y vehículo (DVIR)"
+
+#: backend/templates/fleet/inspection_list.html:10
+msgid ""
+"Pre-shift circle checks, brake and fluid audits, and safety compliance "
+"records."
+msgstr "Comprobaciones previas, auditorías de frenos y fluidos, y registros de seguridad."
+
+#: backend/templates/fleet/inspection_list.html:13
+msgid "File Inspection"
+msgstr "Registrar inspección"
+
+#: backend/templates/fleet/inspection_list.html:23
+msgid "Report #"
+msgstr "Informe N°"
+
+#: backend/templates/fleet/inspection_list.html:27
+msgid "Safety Result"
+msgstr "Resultado de seguridad"
+
+#: backend/templates/fleet/inspection_list.html:28
+msgid "Audited Checklist"
+msgstr "Lista de verificación auditada"
+
+#: backend/templates/fleet/inspection_list.html:29
+msgid "Timestamp"
+msgstr "Marca de tiempo"
+
+#: backend/templates/fleet/inspection_list.html:45
+msgid "DEFECTS FOUND"
+msgstr "DEFECTOS ENCONTRADOS"
+
+#: backend/templates/fleet/inspection_list.html:49
+msgid "Brakes"
+msgstr "Frenos"
+
+#: backend/templates/fleet/inspection_list.html:50
+msgid "Tires"
+msgstr "Neumáticos"
+
+#: backend/templates/fleet/inspection_list.html:51
+msgid "Fluids"
+msgstr "Fluidos"
+
+#: backend/templates/fleet/maintenance_list.html:4
+#: backend/templates/fleet/vehicle_detail.html:51
+msgid "Maintenance Schedules"
+msgstr "Programaciones de mantenimiento"
+
+#: backend/templates/fleet/maintenance_list.html:9
+msgid "Preventative Maintenance & Service Work"
+msgstr "Mantenimiento preventivo y servicios"
+
+#: backend/templates/fleet/maintenance_list.html:10
+msgid ""
+"Scheduled service intervals, routine calibrations, and overdue alert "
+"warnings."
+msgstr "Intervalos de servicio programados, calibraciones y avisos de vencimiento."
+
+#: backend/templates/fleet/maintenance_list.html:14
+msgid "Services Overdue"
+msgstr "Servicios vencidos"
+
+#: backend/templates/fleet/maintenance_list.html:16
+msgid "All Maintenance Nominal"
+msgstr "Todo el mantenimiento al día"
+
+#: backend/templates/fleet/maintenance_list.html:28
+msgid "Service Task"
+msgstr "Tarea de servicio"
+
+#: backend/templates/fleet/maintenance_list.html:29
+msgid "Required Interval"
+msgstr "Intervalo requerido"
+
+#: backend/templates/fleet/maintenance_list.html:30
+msgid "Last Serviced"
+msgstr "Último servicio"
+
+#: backend/templates/fleet/maintenance_list.html:31
+msgid "Status / Due In"
+msgstr "Estado / Vence en"
+
+#: backend/templates/fleet/maintenance_list.html:43
+#: backend/templates/fleet/vehicle_detail.html:57
+msgid "Every"
+msgstr "Cada"
+
+#: backend/templates/fleet/maintenance_list.html:47
+msgid "OVERDUE by"
+msgstr "VENCIDO por"
+
+#: backend/templates/fleet/maintenance_list.html:49
+msgid "Due in"
+msgstr "Vence en"
+
+#: backend/templates/fleet/maintenance_list.html:54
+msgid "Service"
+msgstr "Servicio"
+
+#: backend/templates/fleet/trip_list.html:9
+msgid "Commercial Trip Logbook"
+msgstr "Libro de registro de viajes comerciales"
+
+#: backend/templates/fleet/trip_list.html:10
+msgid ""
+"Comprehensive historical telemetry across 3,000+ completed transit runs."
+msgstr "Telemetría histórica completa en más de 3.000 viajes completados."
+
+#: backend/templates/fleet/trip_list.html:13
+msgid "Total Recorded"
+msgstr "Total registrado"
+
+#: backend/templates/fleet/trip_list.html:13
+msgid "Trips"
+msgstr "Viajes"
+
+#: backend/templates/fleet/trip_list.html:21
+msgid "Total Logged Distance"
+msgstr "Distancia total registrada"
+
+#: backend/templates/fleet/trip_list.html:27
+msgid "Total Fuel Expenditure"
+msgstr "Gasto total de combustible"
+
+#: backend/templates/fleet/trip_list.html:39
+msgid "Trip #"
+msgstr "Viaje N°"
+
+#: backend/templates/fleet/trip_list.html:42
+msgid "Odometer Range"
+msgstr "Rango de odómetro"
+
+#: backend/templates/fleet/trip_list.html:45
+msgid "Date & Time"
+msgstr "Fecha y hora"
+
+#: backend/templates/fleet/vehicle_detail.html:4
+msgid "Vehicle Profile"
+msgstr "Perfil del vehículo"
+
+#: backend/templates/fleet/vehicle_detail.html:9
+msgid "Back to Directory"
+msgstr "Volver al directorio"
+
+#: backend/templates/fleet/vehicle_detail.html:19
+msgid "Edit in Admin"
+msgstr "Editar en administración"
+
+#: backend/templates/fleet/vehicle_detail.html:29
+msgid "Current Odometer"
+msgstr "Odómetro actual"
+
+#: backend/templates/fleet/vehicle_detail.html:35
+msgid "Fuel Powertrain"
+msgstr "Motorización"
+
+#: backend/templates/fleet/vehicle_detail.html:41
+msgid "Lifetime Trips"
+msgstr "Viajes totales"
+
+#: backend/templates/fleet/vehicle_detail.html:57
+msgid "Last"
+msgstr "Último"
+
+#: backend/templates/fleet/vehicle_detail.html:60
+msgid "Overdue"
+msgstr "Vencido"
+
+#: backend/templates/fleet/vehicle_detail.html:62
+msgid "OK"
+msgstr "OK"
+
+#: backend/templates/fleet/vehicle_detail.html:66
+msgid "No schedules configured."
+msgstr "No hay programaciones configuradas."
+
+#: backend/templates/fleet/vehicle_detail.html:75
+msgid "Recent Trip History"
+msgstr "Historial de viajes reciente"
+
+#: backend/templates/fleet/vehicle_detail.html:81
+msgid "Odometer (Start &rarr; End)"
+msgstr "Odómetro (Inicio &rarr; Fin)"
+
+#: backend/templates/fleet/vehicle_detail.html:95
+msgid "No trips logged."
+msgstr "No hay viajes registrados."
+
+#: backend/templates/fleet/vehicle_list.html:4
+msgid "Vehicle Directory"
+msgstr "Directorio de vehículos"
+
+#: backend/templates/fleet/vehicle_list.html:9
+msgid "Commercial Fleet Directory"
+msgstr "Directorio de flota comercial"
+
+#: backend/templates/fleet/vehicle_list.html:10
+msgid "Search and inspect active, in-service, and retired vehicles."
+msgstr "Buscar e inspeccionar vehículos activos, en servicio y retirados."
+
+#: backend/templates/fleet/vehicle_list.html:13
+msgid "Register Vehicle"
+msgstr "Registrar vehículo"
+
+#: backend/templates/fleet/vehicle_list.html:23
+msgid "Search plate, VIN, make, model..."
+msgstr "Buscar placa, VIN, marca, modelo..."
+
+#: backend/templates/fleet/vehicle_list.html:28
+msgid "All Operational Statuses"
+msgstr "Todos los estados operativos"
+
+#: backend/templates/fleet/vehicle_list.html:36
+msgid "All Fuel Types"
+msgstr "Todos los tipos de combustible"
+
+#: backend/templates/fleet/vehicle_list.html:43
+msgid "Reset"
+msgstr "Restablecer"
+
+#: backend/templates/fleet/vehicle_list.html:56
+msgid "Fuel Type"
+msgstr "Tipo de combustible"
+
+#: backend/templates/fleet/vehicle_list.html:71
+msgid "Year"
+msgstr "Año"
+
+#: backend/templates/fleet/vehicle_list.html:78
+msgid "Profile"
+msgstr "Perfil"
+
+#: backend/templates/fleet/vehicle_list.html:83
+msgid "No vehicles match the filter criteria."
+msgstr "Ningún vehículo coincide con los criterios de filtro."
+
+#: backend/templates/registration/login.html:14
+msgid "Welcome Back"
+msgstr "Bienvenido de nuevo"
+
+#: backend/templates/registration/login.html:15
+msgid "Sign in to access fleet operations & telematics"
+msgstr "Inicia sesión para acceder a las operaciones de flota y telemetría"
+
+#: backend/templates/registration/login.html:21
+msgid "Invalid credentials. Please verify your username/email and password."
+msgstr "Credenciales no válidas. Por favor verifica tu usuario/correo y contraseña."
+
+#: backend/templates/registration/login.html:31
+msgid "Username or Email Address"
+msgstr "Nombre de usuario o correo"
+
+#: backend/templates/registration/login.html:42
+msgid "Password"
+msgstr "Contraseña"
+
+#: backend/templates/registration/login.html:45
+msgid "Forgot password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+#: backend/templates/registration/login.html:55
+msgid "Sign In to FleetPulse"
+msgstr "Iniciar sesión en FleetPulse"
+
+#: backend/templates/registration/login.html:60
+msgid "Need a dispatcher account?"
+msgstr "¿Necesitas una cuenta de despachador?"
+
+#: backend/templates/registration/login.html:62
+msgid "Register Here"
+msgstr "Regístrate aquí"
+
+#: backend/templates/registration/password_reset_complete.html:4
+msgid "Password Changed"
+msgstr "Contraseña modificada"
+
+#: backend/templates/registration/password_reset_complete.html:13
+msgid "Password Changed!"
+msgstr "¡Contraseña modificada!"
+
+#: backend/templates/registration/password_reset_complete.html:15
+msgid ""
+"Your password has been successfully updated. You can now sign in with your "
+"new credentials."
+msgstr "Tu contraseña ha sido actualizada con éxito. Ya puedes iniciar sesión con tus nuevas credenciales."
+
+#: backend/templates/registration/password_reset_complete.html:19
+msgid "Sign In Now"
+msgstr "Iniciar sesión ahora"
+
+#: backend/templates/registration/password_reset_confirm.html:4
+msgid "Enter New Password"
+msgstr "Ingresar nueva contraseña"
+
+#: backend/templates/registration/password_reset_confirm.html:14
+msgid "Set New Password"
+msgstr "Establecer nueva contraseña"
+
+#: backend/templates/registration/password_reset_confirm.html:15
+msgid "Please enter and confirm your new secure password."
+msgstr "Por favor ingresa y confirma tu nueva contraseña segura."
+
+#: backend/templates/registration/password_reset_confirm.html:22
+msgid "Please fix the errors below."
+msgstr "Por favor corrige los siguientes errores."
+
+#: backend/templates/registration/password_reset_confirm.html:44
+msgid "Save New Password"
+msgstr "Guardar nueva contraseña"
+
+#: backend/templates/registration/password_reset_confirm.html:49
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used or has expired."
+msgstr "El enlace de restablecimiento no es válido, ha caducado o ya ha sido utilizado."
+
+#: backend/templates/registration/password_reset_confirm.html:51
+msgid "Request a new reset link"
+msgstr "Solicitar un nuevo enlace de restablecimiento"
+
+#: backend/templates/registration/password_reset_done.html:4
+msgid "Email Sent"
+msgstr "Correo enviado"
+
+#: backend/templates/registration/password_reset_done.html:13
+msgid "Check Your Mailbox"
+msgstr "Revisa tu buzón de correo"
+
+#: backend/templates/registration/password_reset_done.html:15
+msgid ""
+"If an account exists with that email, a password reset link has been "
+"dispatched to Mailpit."
+msgstr "Si existe una cuenta con ese correo, se ha enviado un enlace de restablecimiento a Mailpit."
+
+#: backend/templates/registration/password_reset_done.html:19
+msgid "Mailpit Container"
+msgstr "Contenedor Mailpit"
+
+#: backend/templates/registration/password_reset_done.html:20
+msgid "Open your local Mailpit inbox at"
+msgstr "Abre tu bandeja local de Mailpit en"
+
+#: backend/templates/registration/password_reset_done.html:20
+msgid "to view the email and click the token link."
+msgstr "para ver el correo y hacer clic en el enlace."
+
+#: backend/templates/registration/password_reset_done.html:24
+msgid "Return to Sign In"
+msgstr "Volver al inicio de sesión"
+
+#: backend/templates/registration/password_reset_email.html:2
+#, python-format
+msgid "Hello %(user.get_username)s,"
+msgstr "Hola %(user.get_username)s,"
+
+#: backend/templates/registration/password_reset_email.html:4
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at FleetPulse Commercial Suite."
+msgstr "Recibes este correo porque solicitaste el restablecimiento de tu contraseña en FleetPulse Commercial Suite."
+
+#: backend/templates/registration/password_reset_email.html:6
+msgid "Please click the link below to choose a new password:"
+msgstr "Haz clic en el enlace a continuación para elegir una nueva contraseña:"
+
+#: backend/templates/registration/password_reset_email.html:9
+msgid "Your username, in case you've forgotten:"
+msgstr "Tu nombre de usuario, en caso de que lo hayas olvidado:"
+
+#: backend/templates/registration/password_reset_email.html:11
+msgid ""
+"If you did not request this, please ignore this email. Your password will "
+"remain unchanged."
+msgstr "Si no solicitaste esto, ignora este correo. Tu contraseña no cambiará."
+
+#: backend/templates/registration/password_reset_email.html:14
+msgid "FleetPulse Automated Operations & Security"
+msgstr "FleetPulse Operaciones Automatizadas y Seguridad"
+
+#: backend/templates/registration/password_reset_form.html:4
+#: backend/templates/registration/password_reset_form.html:14
+msgid "Reset Password"
+msgstr "Restablecer contraseña"
+
+#: backend/templates/registration/password_reset_form.html:15
+msgid ""
+"Enter your email address and we'll send a password reset link via Mailpit."
+msgstr "Ingresa tu correo electrónico y enviaremos un enlace de restablecimiento a través de Mailpit."
+
+#: backend/templates/registration/password_reset_form.html:21
+msgid "Please enter a valid email address."
+msgstr "Por favor ingresa un correo electrónico válido."
+
+#: backend/templates/registration/password_reset_form.html:29
+msgid "Registered Email Address"
+msgstr "Dirección de correo registrada"
+
+#: backend/templates/registration/password_reset_form.html:38
+msgid "Send Password Reset Link"
+msgstr "Enviar enlace de restablecimiento"
+
+#: backend/templates/registration/password_reset_form.html:44
+msgid "Back to Sign In"
+msgstr "Volver al inicio de sesión"
+
+#: backend/templates/registration/register.html:4
+msgid "Create Account"
+msgstr "Crear cuenta"
+
+#: backend/templates/registration/register.html:14
+msgid "Create Operator Account"
+msgstr "Crear cuenta de operador"
+
+#: backend/templates/registration/register.html:15
+msgid "Register to manage vehicles, dispatch trips, and view telemetry"
+msgstr "Regístrate para gestionar vehículos, despachar viajes y ver telemetría"
+
+#: backend/templates/registration/register.html:21
+msgid "Please correct the errors below to continue."
+msgstr "Por favor corrige los siguientes errores para continuar."
+
+#: backend/templates/registration/register.html:43
+msgid "Complete Registration"
+msgstr "Completar registro"
+
+#: backend/templates/registration/register.html:48
+msgid "Already have an account?"
+msgstr "¿Ya tienes una cuenta?"
+
+
+
