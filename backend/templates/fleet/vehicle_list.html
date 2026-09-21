@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}FleetPulse — {% trans "Vehicle Directory" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-1">{% trans "Commercial Fleet Directory" %}</h1>
+        <p class="text-muted mb-0">{% trans "Search and inspect active, in-service, and retired vehicles." %}</p>
+    </div>
+    <a href="{% url 'admin:fleet_vehicle_add' %}" class="btn btn-primary rounded-pill px-3 shadow-sm" target="_blank">
+        <i class="bi bi-plus-lg me-1"></i> {% trans "Register Vehicle" %}
+    </a>
+</div>
+
+<!-- Search & Filters -->
+<div class="card card-neo p-3 mb-4">
+    <form method="get" class="row g-2 align-items-center">
+        <div class="col-md-5">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="{% trans 'Search plate, VIN, make, model...' %}">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select name="status" class="form-select" onchange="this.form.submit()">
+                <option value="">-- {% trans "All Operational Statuses" %} --</option>
+                {% for val, label in status_choices %}
+                    <option value="{{ val }}" {% if selected_status == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="fuel" class="form-select" onchange="this.form.submit()">
+                <option value="">-- {% trans "All Fuel Types" %} --</option>
+                {% for val, label in fuel_choices %}
+                    <option value="{{ val }}" {% if selected_fuel == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-1">
+            <a href="{% url 'fleet:vehicle_list' %}" class="btn btn-outline-secondary w-100" title="{% trans 'Reset' %}"><i class="bi bi-arrow-counterclockwise"></i></a>
+        </div>
+    </form>
+</div>
+
+<!-- Vehicle Table -->
+<div class="card card-neo overflow-hidden mb-4">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light text-muted small text-uppercase">
+                <tr>
+                    <th class="ps-4">{% trans "Vehicle" %}</th>
+                    <th>{% trans "Specifications" %}</th>
+                    <th>{% trans "Fuel Type" %}</th>
+                    <th>{% trans "Odometer" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th class="text-end pe-4">{% trans "Action" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in page_obj %}
+                <tr>
+                    <td class="ps-4">
+                        <a href="{{ v.get_absolute_url }}" class="fw-bold text-dark text-decoration-none font-monospace">{{ v.license_plate }}</a>
+                        <div class="text-muted small">VIN: {{ v.vin }}</div>
+                    </td>
+                    <td>
+                        <div class="fw-semibold">{{ v.make }} {{ v.model }}</div>
+                        <div class="text-muted small">{% trans "Year" %}: {{ v.year }}</div>
+                    </td>
+                    <td><span class="badge bg-secondary-subtle text-secondary rounded-pill">{{ v.get_fuel_type_display }}</span></td>
+                    <td><strong>{{ v.current_odometer }}</strong> km</td>
+                    <td><span class="badge bg-light text-dark border rounded-pill">{{ v.get_status_display }}</span></td>
+                    <td class="text-end pe-4">
+                        <a href="{{ v.get_absolute_url }}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                            <i class="bi bi-eye"></i> {% trans "Profile" %}
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center py-4 text-muted">{% trans "No vehicles match the filter criteria." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination -->
+{% if page_obj.has_other_pages %}
+<nav class="d-flex justify-content-center">
+    <ul class="pagination pagination-sm">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ query }}&status={{ selected_status }}&fuel={{ selected_fuel }}">&laquo;</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link text-dark fw-semibold">{% trans "Page" %} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ query }}&status={{ selected_status }}&fuel={{ selected_fuel }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}FleetPulse — {% trans "Safety Inspections" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h1 class="h3 fw-bold mb-1">{% trans "Driver Safety & Vehicle Inspection Reports (DVIR)" %}</h1>
+        <p class="text-muted mb-0">{% trans "Pre-shift circle checks, brake and fluid audits, and safety compliance records." %}</p>
+    </div>
+    <a href="{% url 'admin:fleet_inspectionreport_add' %}" class="btn btn-primary rounded-pill px-3 shadow-sm" target="_blank">
+        <i class="bi bi-clipboard-check me-1"></i> {% trans "File Inspection" %}
+    </a>
+</div>
+
+<!-- Table -->
+<div class="card card-neo overflow-hidden mb-4">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 small">
+            <thead class="table-light text-muted text-uppercase">
+                <tr>
+                    <th class="ps-4">{% trans "Report #" %}</th>
+                    <th>{% trans "Vehicle" %}</th>
+                    <th>{% trans "Inspector" %}</th>
+                    <th>{% trans "Odometer" %}</th>
+                    <th>{% trans "Safety Result" %}</th>
+                    <th>{% trans "Audited Checklist" %}</th>
+                    <th class="text-end pe-4">{% trans "Timestamp" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in page_obj %}
+                <tr>
+                    <td class="ps-4 font-monospace fw-bold">#{{ i.id }}</td>
+                    <td>
+                        <a href="{{ i.vehicle.get_absolute_url }}" class="fw-bold text-dark text-decoration-none font-monospace">{{ i.vehicle.license_plate }}</a>
+                    </td>
+                    <td>{{ i.inspector.get_full_name|default:i.inspector.username }}</td>
+                    <td>{{ i.odometer_reading }} km</td>
+                    <td>
+                        {% if i.overall_passed %}
+                            <span class="badge bg-success-subtle text-success rounded-pill">✓ {% trans "PASSED" %}</span>
+                        {% else %}
+                            <span class="badge bg-danger rounded-pill">⚠️ {% trans "DEFECTS FOUND" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="badge bg-light text-dark border">{% trans "Brakes" %}: {% if i.brakes_passed %}✓{% else %}✗{% endif %}</span>
+                        <span class="badge bg-light text-dark border">{% trans "Tires" %}: {% if i.tires_passed %}✓{% else %}✗{% endif %}</span>
+                        <span class="badge bg-light text-dark border">{% trans "Fluids" %}: {% if i.fluids_passed %}✓{% else %}✗{% endif %}</span>
+                    </td>
+                    <td class="text-end pe-4 text-muted">{{ i.inspected_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination -->
+{% if page_obj.has_other_pages %}
+<nav class="d-flex justify-content-center">
+    <ul class="pagination pagination-sm">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link text-dark fw-semibold">{% trans "Page" %} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}
