@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 
 class VehicleQuerySet(models.QuerySet):
@@ -19,15 +20,15 @@ class Vehicle(models.Model):
     """Represents a commercial vehicle within the fleet."""
 
     class Status(models.TextChoices):
-        ACTIVE = 'ACTIVE', 'Active & Operational'
-        MAINTENANCE = 'MAINTENANCE', 'In Maintenance'
-        RETIRED = 'RETIRED', 'Retired'
+        ACTIVE = 'ACTIVE', _('Active & Operational')
+        MAINTENANCE = 'MAINTENANCE', _('In Maintenance')
+        RETIRED = 'RETIRED', _('Retired')
 
     class FuelType(models.TextChoices):
-        DIESEL = 'DIESEL', 'Diesel'
-        PETROL = 'PETROL', 'Petrol'
-        ELECTRIC = 'ELECTRIC', 'Electric'
-        HYBRID = 'HYBRID', 'Hybrid'
+        DIESEL = 'DIESEL', _('Diesel')
+        PETROL = 'PETROL', _('Petrol')
+        ELECTRIC = 'ELECTRIC', _('Electric')
+        HYBRID = 'HYBRID', _('Hybrid')
 
     vin = models.CharField('VIN', max_length=17, unique=True, help_text='17-character VIN')
     license_plate = models.CharField('License Plate', max_length=15, unique=True)
@@ -59,3 +60,11 @@ class Vehicle(models.Model):
     @property
     def is_operational(self) -> bool:
         return self.status == self.Status.ACTIVE
+
+    @property
+    def overdue_schedules(self):
+        return [s for s in self.maintenance_schedules.all() if s.is_due]
+
+    @property
+    def has_overdue_maintenance(self) -> bool:
+        return any(s.is_due for s in self.maintenance_schedules.all())
