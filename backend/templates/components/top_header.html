@@ -62,11 +62,13 @@
                     <i class="bi bi-plus-circle text-primary"></i>
                     <span class="small fw-semibold d-none d-xl-inline">{% trans "Trajet" %}</span>
                 </button>
+                {% if ENABLE_AI_COPILOT %}
                 <button type="button" class="btn btn-sm btn-primary rounded-pill px-2 px-md-3 py-1 d-flex align-items-center gap-1"
                         data-bs-toggle="offcanvas" data-bs-target="#aiCopilotOffcanvas">
                     <i class="bi bi-robot"></i>
                     <span class="small fw-semibold d-none d-md-inline">Copilot</span>
                 </button>
+                {% endif %}
 
                 <div class="dropdown">
                     <button class="btn btn-sm btn-light border rounded-pill px-2 px-md-3 py-1 d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown">

@@ -114,7 +114,9 @@
     {% if request.user.is_authenticated %}
         {% include "components/status_request_modal.html" %}
         {% include "components/log_trip_modal.html" %}
-        {% include "components/ai_copilot_drawer.html" %}
+        {% if ENABLE_AI_COPILOT %}
+            {% include "components/ai_copilot_drawer.html" %}
+        {% endif %}
     {% endif %}
     {% block extra_js %}{% endblock %}
 </body>

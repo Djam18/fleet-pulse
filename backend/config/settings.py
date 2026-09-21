@@ -23,6 +23,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fleetpulse-dev-fallback-key')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') if h.strip()]
+ENABLE_AI_COPILOT = os.getenv('ENABLE_AI_COPILOT', 'False').lower() in ('true', '1', 'yes')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,6 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'fleet.context_processors.fleet_features',
             ],
         },
     },
