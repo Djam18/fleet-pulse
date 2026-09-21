@@ -1,30 +1,5 @@
 {% load i18n %}
-<!-- Dynamic Vehicle Table with i18n and Alpine.js -->
-<div class="card card-neo mb-4 overflow-hidden" x-data="{ search: '', filterStatus: 'ALL' }">
-    <div class="card-header bg-white py-3 px-4 border-bottom d-flex flex-wrap gap-3 align-items-center justify-content-between">
-        <div>
-            <h3 class="h6 fw-bold mb-0">{% trans "Vehicle Registry" %}</h3>
-            <p class="text-muted small mb-0">{% trans "Live status and telematics overview" %}</p>
-        </div>
-        <div class="d-flex flex-wrap gap-2 align-items-center">
-            <!-- Dynamic Status Tabs from Model Choices -->
-            <div class="btn-group btn-group-sm" role="group">
-                <button type="button" class="btn" :class="filterStatus === 'ALL' ? 'btn-dark' : 'btn-outline-secondary'" @click="filterStatus = 'ALL'">
-                    {% trans "All" %}
-                </button>
-                {% for choice in status_choices %}
-                <button type="button" class="btn" :class="filterStatus === '{{ choice.value }}' ? 'btn-primary' : 'btn-outline-secondary'" @click="filterStatus = '{{ choice.value }}'">
-                    {{ choice.label }}
-                </button>
-                {% endfor %}
-            </div>
-            <!-- Localized Search Input -->
-            <div class="input-group input-group-sm" style="max-width: 240px;">
-                <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
-                <input type="text" class="form-control" placeholder="{% trans 'Search vehicles...' %}" x-model="search">
-            </div>
-        </div>
-    </div>
+<div class="card card-neo overflow-hidden mb-4">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light text-muted small text-uppercase">
@@ -38,9 +13,8 @@
                 </tr>
             </thead>
             <tbody>
-                {% for v in vehicles %}
-                <tr x-show="(filterStatus === 'ALL' || filterStatus === '{{ v.status }}') && 
-                            (search === '' || '{{ v.license_plate }} {{ v.make }} {{ v.model }} {{ v.vin }}'.toLowerCase().includes(search.toLowerCase()))">
+                {% for v in page_obj %}
+                <tr>
                     <td class="ps-4">
                         <div class="d-flex align-items-center gap-2">
                             <a href="{{ v.get_absolute_url }}" class="font-monospace fw-bold text-dark text-decoration-none">{{ v.license_plate }}</a>
@@ -92,7 +66,7 @@
                     </td>
                 </tr>
                 {% empty %}
-                <tr><td colspan="6" class="text-center py-4 text-muted">{% trans "No vehicles found." %}</td></tr>
+                <tr><td colspan="6" class="text-center py-4 text-muted">{% trans "No vehicles match the filter criteria." %}</td></tr>
                 {% endfor %}
             </tbody>
         </table>

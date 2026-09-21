@@ -1,0 +1,30 @@
+{% load i18n %}
+<div class="card card-neo p-3 mb-4">
+    <form method="get" class="row g-2 align-items-center">
+        <div class="col-md-5">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="{% trans 'Search plate, VIN, make, model...' %}">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select name="status" class="form-select" onchange="this.form.submit()">
+                <option value="">-- {% trans "All Operational Statuses" %} --</option>
+                {% for val, label in status_choices %}
+                    <option value="{{ val }}" {% if selected_status == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="fuel" class="form-select" onchange="this.form.submit()">
+                <option value="">-- {% trans "All Fuel Types" %} --</option>
+                {% for val, label in fuel_choices %}
+                    <option value="{{ val }}" {% if selected_fuel == val %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-1">
+            <a href="{% url 'fleet:vehicle_list' %}" class="btn btn-outline-secondary w-100" title="{% trans 'Reset' %}"><i class="bi bi-arrow-counterclockwise"></i></a>
+        </div>
+    </form>
+</div>

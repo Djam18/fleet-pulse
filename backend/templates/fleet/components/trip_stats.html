@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card card-neo p-3">
+            <span class="text-muted small fw-semibold text-uppercase">{% trans "Total Logged Distance" %}</span>
+            <h3 class="fw-bold mb-0 mt-1 text-primary">{{ stats.total_distance|default:0 }} <small class="fs-6 text-muted">km</small></h3>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-neo p-3">
+            <span class="text-muted small fw-semibold text-uppercase">{% trans "Total Fuel Expenditure" %}</span>
+            <h3 class="fw-bold mb-0 mt-1 text-success">${{ stats.total_fuel|floatformat:2|default:"0.00" }}</h3>
+        </div>
+    </div>
+</div>

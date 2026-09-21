@@ -18,61 +18,9 @@
     </div>
 </div>
 
-<!-- Table -->
-<div class="card card-neo overflow-hidden mb-4">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0 small">
-            <thead class="table-light text-muted text-uppercase">
-                <tr>
-                    <th class="ps-4">{% trans "Vehicle" %}</th>
-                    <th>{% trans "Service Task" %}</th>
-                    <th>{% trans "Required Interval" %}</th>
-                    <th>{% trans "Last Serviced" %}</th>
-                    <th>{% trans "Status / Due In" %}</th>
-                    <th class="text-end pe-4">{% trans "Action" %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for s in page_obj %}
-                <tr>
-                    <td class="ps-4">
-                        <a href="{{ s.vehicle.get_absolute_url }}" class="fw-bold text-dark text-decoration-none font-monospace">{{ s.vehicle.license_plate }}</a>
-                        <div class="text-muted small">{{ s.vehicle.make }} {{ s.vehicle.model }}</div>
-                    </td>
-                    <td><strong>{{ s.get_service_code_display }}</strong></td>
-                    <td>{% trans "Every" %} {{ s.interval_km }} km</td>
-                    <td>{{ s.last_service_odometer }} km ({{ s.last_service_date|date:"M d, Y" }})</td>
-                    <td>
-                        {% if s.is_due %}
-                            <span class="badge bg-danger rounded-pill">⚠️ {% trans "OVERDUE by" %} {{ s.km_until_due|stringformat:"d"|slice:"1:" }} km</span>
-                        {% else %}
-                            <span class="badge bg-success-subtle text-success rounded-pill">{% trans "Due in" %} {{ s.km_until_due }} km</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-end pe-4">
-                        <a href="{% url 'admin:fleet_maintenanceschedule_change' s.id %}" class="btn btn-sm btn-outline-dark rounded-pill px-3" target="_blank">
-                            <i class="bi bi-wrench"></i> {% trans "Service" %}
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+<!-- Maintenance Schedule Table Component -->
+{% include "fleet/components/maintenance_table.html" %}
 
-<!-- Pagination -->
-{% if page_obj.has_other_pages %}
-<nav class="d-flex justify-content-center">
-    <ul class="pagination pagination-sm">
-        {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-        {% endif %}
-        <li class="page-item disabled"><span class="page-link text-dark fw-semibold">{% trans "Page" %} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
-        {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-        {% endif %}
-    </ul>
-</nav>
-{% endif %}
+<!-- Pagination System Component -->
+{% include "components/pagination.html" %}
 {% endblock %}

@@ -4,100 +4,19 @@
 {% block title %}{{ vehicle.license_plate }} — {% trans "Vehicle Profile" %}{% endblock %}
 
 {% block content %}
-<div class="mb-4">
-    <a href="{% url 'fleet:vehicle_list' %}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 mb-2">
-        <i class="bi bi-arrow-left"></i> {% trans "Back to Directory" %}
-    </a>
-    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-        <div>
-            <h1 class="h2 fw-bold font-monospace mb-1">{{ vehicle.license_plate }}</h1>
-            <div class="text-muted">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }}) &bull; VIN: <span class="font-monospace">{{ vehicle.vin }}</span></div>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-            <span class="badge bg-light text-dark border p-2 fs-6 rounded-pill">{{ vehicle.get_status_display }}</span>
-            <a href="{% url 'admin:fleet_vehicle_change' vehicle.id %}" class="btn btn-dark rounded-pill px-3" target="_blank">
-                <i class="bi bi-pencil-square me-1"></i> {% trans "Edit in Admin" %}
-            </a>
-        </div>
-    </div>
-</div>
+    <!-- Vehicle Profile Header -->
+    {% include "fleet/components/vehicle_detail_header.html" %}
 
-<!-- Specs KPI Row -->
-<div class="row g-3 mb-4">
-    <div class="col-sm-4">
-        <div class="card card-neo p-3">
-            <span class="text-muted small text-uppercase fw-semibold">{% trans "Current Odometer" %}</span>
-            <h3 class="fw-bold mb-0 mt-1">{{ vehicle.current_odometer }} <small class="text-muted fs-6">km</small></h3>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card card-neo p-3">
-            <span class="text-muted small text-uppercase fw-semibold">{% trans "Fuel Powertrain" %}</span>
-            <h3 class="fw-bold mb-0 mt-1">{{ vehicle.get_fuel_type_display }}</h3>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card card-neo p-3">
-            <span class="text-muted small text-uppercase fw-semibold">{% trans "Lifetime Trips" %}</span>
-            <h3 class="fw-bold mb-0 mt-1">{{ vehicle.trips.count }} <small class="text-muted fs-6">{% trans "records" %}</small></h3>
-        </div>
-    </div>
-</div>
+    <!-- Technical Specs & Telematics KPI Summary -->
+    {% include "fleet/components/vehicle_detail_kpis.html" %}
 
-<div class="row g-4">
-    <!-- Maintenance Schedules -->
-    <div class="col-lg-5">
-        <div class="card card-neo p-4 h-100">
-            <h3 class="h6 fw-bold mb-3"><i class="bi bi-wrench me-1 text-warning"></i> {% trans "Maintenance Schedules" %}</h3>
-            <div class="list-group list-group-flush">
-                {% for s in vehicle.maintenance_schedules.all %}
-                <div class="list-group-item px-0 py-3 d-flex justify-content-between align-items-center">
-                    <div>
-                        <div class="fw-semibold">{{ s.get_service_code_display }}</div>
-                        <div class="text-muted small">{% trans "Every" %} {{ s.interval_km }} km &bull; {% trans "Last" %}: {{ s.last_service_odometer }} km</div>
-                    </div>
-                    {% if s.is_due %}
-                        <span class="badge bg-danger rounded-pill">⚠️ {% trans "Overdue" %}</span>
-                    {% else %}
-                        <span class="badge bg-success-subtle text-success rounded-pill">{% trans "OK" %} ({{ s.km_until_due }} km)</span>
-                    {% endif %}
-                </div>
-                {% empty %}
-                <p class="text-muted small">{% trans "No schedules configured." %}</p>
-                {% endfor %}
-            </div>
+    <!-- Operational Split View -->
+    <div class="row g-4">
+        <div class="col-lg-5">
+            {% include "fleet/components/vehicle_detail_maintenance.html" %}
+        </div>
+        <div class="col-lg-7">
+            {% include "fleet/components/vehicle_detail_trips.html" %}
         </div>
     </div>
-
-    <!-- Recent Trip Timeline -->
-    <div class="col-lg-7">
-        <div class="card card-neo p-4 h-100">
-            <h3 class="h6 fw-bold mb-3"><i class="bi bi-signpost-split me-1 text-primary"></i> {% trans "Recent Trip History" %}</h3>
-            <div class="table-responsive">
-                <table class="table table-sm table-hover align-middle mb-0 small">
-                    <thead class="table-light">
-                        <tr>
-                            <th>{% trans "Driver" %}</th>
-                            <th>{% trans "Odometer (Start &rarr; End)" %}</th>
-                            <th>{% trans "Distance" %}</th>
-                            <th class="text-end">{% trans "Date" %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for t in trips %}
-                        <tr>
-                            <td>{{ t.driver.get_full_name|default:t.driver.username|default:"Unassigned" }}</td>
-                            <td>{{ t.start_odometer }} &rarr; {{ t.end_odometer|default:"-" }} km</td>
-                            <td><span class="badge bg-primary-subtle text-primary">{{ t.distance_km }} km</span></td>
-                            <td class="text-end text-muted">{{ t.start_time|date:"M d, Y" }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr><td colspan="4" class="text-center py-3 text-muted">{% trans "No trips logged." %}</td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}

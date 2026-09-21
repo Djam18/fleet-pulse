@@ -1,0 +1,48 @@
+{% load i18n %}
+<div class="card card-neo overflow-hidden mb-4">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 small">
+            <thead class="table-light text-muted text-uppercase">
+                <tr>
+                    <th class="ps-4">{% trans "Trip #" %}</th>
+                    <th>{% trans "Vehicle" %}</th>
+                    <th>{% trans "Driver" %}</th>
+                    <th>{% trans "Purpose" %}</th>
+                    <th>{% trans "Odometer Range" %}</th>
+                    <th>{% trans "Distance" %}</th>
+                    <th>{% trans "Fuel" %}</th>
+                    <th class="text-end pe-4">{% trans "Date & Time" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in page_obj %}
+                <tr>
+                    <td class="ps-4 font-monospace fw-bold">#{{ t.id }}</td>
+                    <td>
+                        <a href="{{ t.vehicle.get_absolute_url }}" class="fw-bold text-dark text-decoration-none font-monospace">{{ t.vehicle.license_plate }}</a>
+                    </td>
+                    <td>
+                        <span class="d-inline-flex align-items-center gap-1">
+                            <i class="bi bi-person-circle text-muted"></i>
+                            <span>{{ t.driver.get_full_name|default:t.driver.username|default:"Non assigné" }}</span>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="text-truncate d-inline-block cell-truncate-md text-muted" data-bs-toggle="tooltip" title="{{ t.purpose }}">
+                            {{ t.purpose }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge bg-light text-dark border font-monospace">{{ t.start_odometer }} &rarr; {{ t.end_odometer }} km</span>
+                    </td>
+                    <td><span class="badge bg-primary-subtle text-primary rounded-pill fw-semibold">{{ t.distance_km }} km</span></td>
+                    <td><span class="badge bg-secondary-subtle text-secondary rounded-pill">${{ t.fuel_cost }} ({{ t.fuel_liters }} L)</span></td>
+                    <td class="text-end pe-4 text-muted">{{ t.start_time|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="8" class="text-center py-4 text-muted">{% trans "No trips found." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

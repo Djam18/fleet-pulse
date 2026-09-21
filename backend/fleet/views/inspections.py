@@ -10,7 +10,7 @@ def inspection_list_view(request):
     """DVIR pre-trip and post-trip safety checklists with pass/fail tracking."""
     inspections = InspectionReport.objects.select_related('vehicle', 'inspector').order_by('-inspected_at')
 
-    paginator = Paginator(inspections, 15)
+    paginator = Paginator(inspections, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

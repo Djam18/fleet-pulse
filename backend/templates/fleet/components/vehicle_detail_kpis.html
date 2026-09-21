@@ -1,0 +1,21 @@
+{% load i18n %}
+<div class="row g-3 mb-4">
+    <div class="col-sm-4">
+        <div class="card card-neo p-3">
+            <span class="text-muted small text-uppercase fw-semibold">{% trans "Current Odometer" %}</span>
+            <h3 class="fw-bold mb-0 mt-1">{{ vehicle.current_odometer }} <small class="text-muted fs-6">km</small></h3>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card card-neo p-3">
+            <span class="text-muted small text-uppercase fw-semibold">{% trans "Fuel Powertrain" %}</span>
+            <h3 class="fw-bold mb-0 mt-1">{{ vehicle.get_fuel_type_display }}</h3>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card card-neo p-3">
+            <span class="text-muted small text-uppercase fw-semibold">{% trans "Lifetime Trips" %}</span>
+            <h3 class="fw-bold mb-0 mt-1">{{ vehicle.trips.count }} <small class="text-muted fs-6">{% trans "records" %}</small></h3>
+        </div>
+    </div>
+</div>

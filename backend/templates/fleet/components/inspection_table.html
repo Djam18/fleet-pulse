@@ -1,0 +1,58 @@
+{% load i18n %}
+<div class="card card-neo overflow-hidden mb-4">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 small">
+            <thead class="table-light text-muted text-uppercase">
+                <tr>
+                    <th class="ps-4">{% trans "Report #" %}</th>
+                    <th>{% trans "Vehicle" %}</th>
+                    <th>{% trans "Inspector" %}</th>
+                    <th>{% trans "Odometer" %}</th>
+                    <th>{% trans "Safety Result" %}</th>
+                    <th>{% trans "Audited Checklist" %}</th>
+                    <th class="text-end pe-4">{% trans "Timestamp" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in page_obj %}
+                <tr>
+                    <td class="ps-4 font-monospace fw-bold">#{{ i.id }}</td>
+                    <td>
+                        <a href="{{ i.vehicle.get_absolute_url }}" class="fw-bold text-dark text-decoration-none font-monospace">{{ i.vehicle.license_plate }}</a>
+                    </td>
+                    <td>{{ i.inspector.get_full_name|default:i.inspector.username }}</td>
+                    <td>{{ i.odometer_reading }} km</td>
+                    <td>
+                        {% if i.overall_passed %}
+                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1">
+                                <i class="bi bi-check-circle-fill me-1"></i>{% trans "PASSED" %}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-1">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>{% trans "DEFECTS FOUND" %}
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="badge {% if i.brakes_passed %}bg-success-subtle text-success border border-success-subtle{% else %}bg-danger-subtle text-danger border border-danger-subtle{% endif %} rounded-pill"
+                              data-bs-toggle="tooltip" title="{% trans "Système de freinage" %}">
+                            {% trans "Brakes" %}: {% if i.brakes_passed %}✓{% else %}✗{% endif %}
+                        </span>
+                        <span class="badge {% if i.tires_passed %}bg-success-subtle text-success border border-success-subtle{% else %}bg-danger-subtle text-danger border border-danger-subtle{% endif %} rounded-pill"
+                              data-bs-toggle="tooltip" title="{% trans "Pression et bande de roulement des pneus" %}">
+                            {% trans "Tires" %}: {% if i.tires_passed %}✓{% else %}✗{% endif %}
+                        </span>
+                        <span class="badge {% if i.fluids_passed %}bg-success-subtle text-success border border-success-subtle{% else %}bg-danger-subtle text-danger border border-danger-subtle{% endif %} rounded-pill"
+                              data-bs-toggle="tooltip" title="{% trans "Niveaux d'huile et liquide de refroidissement" %}">
+                            {% trans "Fluids" %}: {% if i.fluids_passed %}✓{% else %}✗{% endif %}
+                        </span>
+                    </td>
+                    <td class="text-end pe-4 text-muted">{{ i.inspected_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center py-4 text-muted">{% trans "No inspection reports found." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

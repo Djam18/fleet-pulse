@@ -14,68 +14,12 @@
     </div>
 </div>
 
-<!-- Aggregation Cards -->
-<div class="row g-3 mb-4">
-    <div class="col-md-6">
-        <div class="card card-neo p-3">
-            <span class="text-muted small fw-semibold text-uppercase">{% trans "Total Logged Distance" %}</span>
-            <h3 class="fw-bold mb-0 mt-1 text-primary">{{ stats.total_distance|default:0 }} <small class="fs-6 text-muted">km</small></h3>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card card-neo p-3">
-            <span class="text-muted small fw-semibold text-uppercase">{% trans "Total Fuel Expenditure" %}</span>
-            <h3 class="fw-bold mb-0 mt-1 text-success">${{ stats.total_fuel|floatformat:2|default:"0.00" }}</h3>
-        </div>
-    </div>
-</div>
+<!-- Aggregation Summary Component -->
+{% include "fleet/components/trip_stats.html" %}
 
-<!-- Table -->
-<div class="card card-neo overflow-hidden mb-4">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0 small">
-            <thead class="table-light text-muted text-uppercase">
-                <tr>
-                    <th class="ps-4">{% trans "Trip #" %}</th>
-                    <th>{% trans "Vehicle" %}</th>
-                    <th>{% trans "Driver" %}</th>
-                    <th>{% trans "Odometer Range" %}</th>
-                    <th>{% trans "Distance" %}</th>
-                    <th>{% trans "Fuel Cost" %}</th>
-                    <th class="text-end pe-4">{% trans "Date & Time" %}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for t in page_obj %}
-                <tr>
-                    <td class="ps-4 font-monospace fw-bold">#{{ t.id }}</td>
-                    <td>
-                        <a href="{{ t.vehicle.get_absolute_url }}" class="fw-bold text-dark text-decoration-none">{{ t.vehicle.license_plate }}</a>
-                    </td>
-                    <td>{{ t.driver.get_full_name|default:t.driver.username|default:"Unassigned" }}</td>
-                    <td>{{ t.start_odometer }} &rarr; {{ t.end_odometer }} km</td>
-                    <td><span class="badge bg-primary-subtle text-primary">{{ t.distance_km }} km</span></td>
-                    <td>${{ t.fuel_cost }} ({{ t.fuel_liters }} L)</td>
-                    <td class="text-end pe-4 text-muted">{{ t.start_time|date:"M d, Y H:i" }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+<!-- Trip Logbook Table Component -->
+{% include "fleet/components/trip_table.html" %}
 
-<!-- Pagination -->
-{% if page_obj.has_other_pages %}
-<nav class="d-flex justify-content-center">
-    <ul class="pagination pagination-sm">
-        {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-        {% endif %}
-        <li class="page-item disabled"><span class="page-link text-dark fw-semibold">{% trans "Page" %} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
-        {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-        {% endif %}
-    </ul>
-</nav>
-{% endif %}
+<!-- Pagination System Component -->
+{% include "components/pagination.html" %}
 {% endblock %}

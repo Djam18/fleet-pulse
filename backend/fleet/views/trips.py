@@ -17,7 +17,7 @@ def trip_list_view(request):
         total_fuel=Sum('fuel_cost')
     )
 
-    paginator = Paginator(trips, 20)
+    paginator = Paginator(trips, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

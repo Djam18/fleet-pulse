@@ -1,0 +1,28 @@
+{% load i18n %}
+<div class="card card-neo p-4 h-100">
+    <h3 class="h6 fw-bold mb-3"><i class="bi bi-signpost-split me-1 text-primary"></i> {% trans "Recent Trip History" %}</h3>
+    <div class="table-responsive">
+        <table class="table table-sm table-hover align-middle mb-0 small">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Driver" %}</th>
+                    <th>{% trans "Odometer (Start &rarr; End)" %}</th>
+                    <th>{% trans "Distance" %}</th>
+                    <th class="text-end">{% trans "Date" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in trips %}
+                <tr>
+                    <td>{{ t.driver.get_full_name|default:t.driver.username|default:"Unassigned" }}</td>
+                    <td>{{ t.start_odometer }} &rarr; {{ t.end_odometer|default:"-" }} km</td>
+                    <td><span class="badge bg-primary-subtle text-primary">{{ t.distance_km }} km</span></td>
+                    <td class="text-end text-muted">{{ t.start_time|date:"M d, Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4" class="text-center py-3 text-muted">{% trans "No trips logged." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -12,7 +12,7 @@ def maintenance_list_view(request):
 
     overdue_count = sum(1 for s in schedules if s.is_due)
 
-    paginator = Paginator(schedules, 15)
+    paginator = Paginator(schedules, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
