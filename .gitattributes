@@ -1,0 +1,59 @@
+# Set default behavior: auto-normalize line endings to LF on checkout
+* text=auto eol=lf
+
+# -----------------------------------------------------------------------------
+# Programming Languages & Source Code Diffs
+# -----------------------------------------------------------------------------
+*.py text diff=python whitespace=space-before-tab,-indent-with-non-tab,trailing-space
+*.html text diff=html
+*.css text diff=css
+*.js text
+*.ts text
+*.jsx text
+*.tsx text
+*.sh text eol=lf
+*.sql text
+
+# -----------------------------------------------------------------------------
+# Configuration, Markup & Documentation
+# -----------------------------------------------------------------------------
+*.json text
+*.yml text
+*.yaml text
+*.toml text
+*.ini text
+*.md text
+*.txt text
+.gitignore text
+.gitattributes text
+.env* text
+
+# -----------------------------------------------------------------------------
+# Localization (GNU gettext)
+# -----------------------------------------------------------------------------
+*.po text diff=gettext
+*.pot text diff=gettext
+*.mo binary
+
+# -----------------------------------------------------------------------------
+# Binary & Asset Files
+# -----------------------------------------------------------------------------
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text
+*.sqlite3 binary
+*.db binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# -----------------------------------------------------------------------------
+# GitHub Linguist Overrides
+# -----------------------------------------------------------------------------
+backend/fleet/migrations/* linguist-generated=true
+backend/locale/** linguist-detectable=true
+backend/static/css/* linguist-detectable=true
