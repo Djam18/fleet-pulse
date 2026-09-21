@@ -1,0 +1,95 @@
+{% load i18n %}
+<div class="row g-4 mb-4">
+    <!-- Driver Recent Trips Table -->
+    <div class="col-lg-7">
+        <div class="card card-neo h-100 overflow-hidden">
+            <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="h6 fw-bold mb-0">{% trans "Mes Trajets Récents" %}</h3>
+                    <p class="text-muted small mb-0">{% trans "Historique de vos dernières missions journalisées" %}</p>
+                </div>
+                <a href="{% url 'fleet:trip_list' %}" class="btn btn-sm btn-outline-primary rounded-pill px-3">
+                    {% trans "Tout voir" %} &rarr;
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light text-muted small text-uppercase">
+                        <tr>
+                            <th class="ps-4">{% trans "Véhicule" %}</th>
+                            <th>{% trans "Odomètre" %}</th>
+                            <th>{% trans "Distance" %}</th>
+                            <th class="text-end pe-4">{% trans "Date" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in driver_recent_trips %}
+                        <tr>
+                            <td class="ps-4">
+                                <a href="{{ t.vehicle.get_absolute_url }}" class="fw-bold font-monospace text-dark text-decoration-none">
+                                    {{ t.vehicle.license_plate }}
+                                </a>
+                                <div class="text-muted small">{{ t.vehicle.make }} {{ t.vehicle.model }}</div>
+                            </td>
+                            <td>{{ t.start_odometer }} &rarr; {{ t.end_odometer|default:"-" }} km</td>
+                            <td><span class="badge bg-primary-subtle text-primary">{{ t.distance_km }} km</span></td>
+                            <td class="text-end pe-4 text-muted small">{{ t.start_time|date:"d M Y, H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center py-4 text-muted">{% trans "Aucun trajet enregistré à votre actif." %}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Driver Status Change Requests Table -->
+    <div class="col-lg-5">
+        <div class="card card-neo h-100 overflow-hidden">
+            <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="h6 fw-bold mb-0">{% trans "Mes Signalements & Demandes" %}</h3>
+                    <p class="text-muted small mb-0">{% trans "Statut des tickets soumis aux administrateurs" %}</p>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-warning text-dark border-warning-subtle rounded-pill px-3"
+                        data-bs-toggle="modal" data-bs-target="#statusRequestModal">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            </div>
+            <div class="list-group list-group-flush">
+                {% for req in driver_requests %}
+                <div class="list-group-item px-4 py-3">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <span class="fw-bold font-monospace text-dark">{{ req.vehicle.license_plate }}</span>
+                        {% if req.status == 'PENDING' %}
+                            <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2 py-1">
+                                <i class="bi bi-hourglass-split me-1"></i>{% trans "En attente" %}
+                            </span>
+                        {% elif req.status == 'AI_APPROVED' %}
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-1">
+                                <i class="bi bi-shield-check me-1"></i>{% trans "Auto-Approuvé" %}
+                            </span>
+                        {% elif req.status == 'ADMIN_APPROVED' %}
+                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1">
+                                <i class="bi bi-check-circle-fill me-1"></i>{% trans "Approuvé Admin" %}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-1">
+                                <i class="bi bi-x-circle-fill me-1"></i>{% trans "Rejeté" %}
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="small text-muted mb-1">
+                        {% trans "Statut visé" %}: <strong>{{ req.get_requested_status_display }}</strong>
+                        &bull; {{ req.created_at|date:"d M H:i" }}
+                    </div>
+                    <div class="small text-secondary text-truncate">{{ req.reason }}</div>
+                </div>
+                {% empty %}
+                <div class="text-center py-4 text-muted small">{% trans "Aucune demande de changement de statut enregistrée." %}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

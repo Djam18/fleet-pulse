@@ -17,11 +17,13 @@
         </div>
     </div>
     <div class="col-md-5 text-md-end">
-        <a href="{% url 'admin:fleet_triplog_add' %}" class="btn btn-dark rounded-pill px-3 shadow-sm me-2" target="_blank">
+        <button type="button" class="btn btn-dark rounded-pill px-3 shadow-sm me-2" data-bs-toggle="modal" data-bs-target="#quickTripModal">
             <i class="bi bi-plus-circle me-1"></i> {% trans "Log Trip" %}
-        </a>
+        </button>
+        {% if request.user.is_staff %}
         <a href="{% url 'admin:fleet_vehicle_add' %}" class="btn btn-outline-dark rounded-pill px-3 shadow-sm" target="_blank">
             <i class="bi bi-truck me-1"></i> {% trans "Add Vehicle" %}
         </a>
+        {% endif %}
     </div>
 </div>

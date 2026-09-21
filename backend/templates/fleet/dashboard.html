@@ -1,20 +1,32 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}FleetPulse — Operational Command Center{% endblock %}
+{% block title %}FleetPulse — {% if is_driver_dashboard %}{% trans "Espace Chauffeur" %}{% else %}{% trans "Centre de Commandement" %}{% endif %}{% endblock %}
 
 {% block content %}
-    <!-- Hero Header -->
-    {% include "fleet/components/hero_header.html" %}
+    {% if is_driver_dashboard %}
+        <!-- Driver Hero Header -->
+        {% include "fleet/components/driver_hero_header.html" %}
 
-    <!-- Metric KPI Cards -->
-    {% include "fleet/components/kpi_cards.html" %}
+        <!-- Driver Personal KPI Metrics -->
+        {% include "fleet/components/driver_kpi_cards.html" %}
 
-    <!-- Chart.js Analytics -->
-    {% include "fleet/components/charts.html" %}
+        <!-- Driver Personal Activity & Tickets -->
+        {% include "fleet/components/driver_activity.html" %}
+    {% else %}
+        <!-- Admin Executive Hero Header -->
+        {% include "fleet/components/hero_header.html" %}
 
-    <!-- Vehicle Table with Alpine.js Filtering -->
-    {% include "fleet/components/vehicle_table.html" %}
+        <!-- Fleet KPI Metric Cards -->
+        {% include "fleet/components/kpi_cards.html" %}
 
-    <!-- Recent Trips & Inspections Activity -->
-    {% include "fleet/components/recent_activity.html" %}
+        <!-- Fleet Analytics Charts -->
+        {% include "fleet/components/charts.html" %}
+
+        <!-- Full Vehicle Registry Table -->
+        {% include "fleet/components/vehicle_table.html" %}
+
+        <!-- Global Activity Feed -->
+        {% include "fleet/components/recent_activity.html" %}
+    {% endif %}
 {% endblock %}

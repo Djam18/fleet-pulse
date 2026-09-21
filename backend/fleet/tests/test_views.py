@@ -13,7 +13,14 @@ class OperationsPagesTests(TestCase):
         self.user = User.objects.create_user(
             username='dispatcher1',
             email='dispatcher1@fleetpulse.local',
-            password='TestPassword123!'
+            password='TestPassword123!',
+            is_staff=True
+        )
+        self.driver_user = User.objects.create_user(
+            username='driver1',
+            email='driver1@fleetpulse.local',
+            password='TestPassword123!',
+            is_staff=False
         )
         self.client.force_login(self.user)
         self.vehicle = Vehicle.objects.create(
@@ -36,7 +43,15 @@ class OperationsPagesTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'fleet/dashboard.html')
         self.assertIn('vehicles', response.context)
+        self.assertIn('page_obj', response.context)
         self.assertIn('status_choices', response.context)
+
+    def test_driver_dashboard_role_separation(self):
+        self.client.force_login(self.driver_user)
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context.get('is_driver_dashboard'))
+        self.assertIn('driver_trips_count', response.context)
 
     def test_dashboard_request_factory_isolation(self):
         request = self.factory.get('/')

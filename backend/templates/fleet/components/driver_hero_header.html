@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="row align-items-center mb-4 g-3">
+    <div class="col-md-7">
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <span class="badge bg-primary text-white rounded-pill px-2 py-1 small">{% trans "Espace Chauffeur" %}</span>
+            <span class="text-muted small">&bull; {% trans "Suivi de mission & télémétrie" %}</span>
+        </div>
+        <h1 class="h2 fw-bold text-slate-900 mb-1" style="letter-spacing: -0.03em;">
+            {% trans "Bienvenue" %}, {{ request.user.get_full_name|default:request.user.username }}
+        </h1>
+        <p class="text-muted mb-2">{% trans "Consultez vos missions, enregistrez vos trajets et suivez vos demandes de statut." %}</p>
+
+        <!-- Live Real-Time Telematics Ticker -->
+        <div x-data="{ msg: 'Awaiting real-time stream broadcast...', active: false }"
+             @telematics-update.window="msg = `${$event.detail.license_plate} • Speed: ${$event.detail.speed_kmh} km/h • Fuel/Batt: ${$event.detail.fuel_battery_pct}% • Status: ${$event.detail.status}`; active = true;"
+             class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white border shadow-xs small">
+            <span class="live-dot" :class="active ? '' : 'bg-secondary'"></span>
+            <span class="fw-semibold text-slate-700" style="font-size: 0.75rem;" x-text="msg">Awaiting real-time stream broadcast...</span>
+        </div>
+    </div>
+    <div class="col-md-5 text-md-end d-flex flex-wrap justify-content-md-end gap-2">
+        <button type="button" class="btn btn-dark rounded-pill px-3 shadow-sm d-inline-flex align-items-center gap-1"
+                data-bs-toggle="modal" data-bs-target="#quickTripModal">
+            <i class="bi bi-plus-circle"></i>
+            <span>{% trans "Enregistrer un trajet" %}</span>
+        </button>
+        <button type="button" class="btn btn-outline-warning text-dark border-warning-subtle rounded-pill px-3 shadow-sm d-inline-flex align-items-center gap-1"
+                data-bs-toggle="modal" data-bs-target="#statusRequestModal">
+            <i class="bi bi-shield-exclamation text-warning"></i>
+            <span>{% trans "Signalement véhicule" %}</span>
+        </button>
+    </div>
+</div>
