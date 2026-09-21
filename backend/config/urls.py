@@ -26,6 +26,7 @@ admin.site.index_title = "Fleet Fleet & Maintenance Dashboard"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', include('fleet.urls')),
 ]
 
